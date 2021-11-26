@@ -1,0 +1,2 @@
+<!ELEMENT comandes (comanda*)>
+<!ELEMENT comanda (#PCDATA)>
