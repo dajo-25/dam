@@ -1,0 +1,62 @@
+#Número de partides
+0
+
+#Número de jugadors
+17
+
+#Número de partides per jugador
+Gumersindo 0
+Celestina 0
+Pepito 0
+Antònia 0
+Filomena 0
+Magí 0
+Ramona 0
+Romualdo 0
+Rodolfo 0
+Esclarmunda 0
+Ponça 0
+Bonaventura 0
+Quintí 0
+Climent 0
+Francesca 0
+Ermengol 0
+Garbí 0
+
+#Número de primeres línies per jugador
+Gumersindo 0
+Celestina 0
+Pepito 0
+Antònia 0
+Filomena 0
+Magí 0
+Ramona 0
+Romualdo 0
+Rodolfo 0
+Esclarmunda 0
+Ponça 0
+Bonaventura 0
+Quintí 0
+Climent 0
+Francesca 0
+Ermengol 0
+Garbí 0
+
+#Número de victòries per jugador
+Gumersindo 0
+Celestina 0
+Pepito 0
+Antònia 0
+Filomena 0
+Magí 0
+Ramona 0
+Romualdo 0
+Rodolfo 0
+Esclarmunda 0
+Ponça 0
+Bonaventura 0
+Quintí 0
+Climent 0
+Francesca 0
+Ermengol 0
+Garbí 0
