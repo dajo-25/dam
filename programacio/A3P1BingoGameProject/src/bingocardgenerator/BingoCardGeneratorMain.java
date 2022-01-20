@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class BingoCardGeneratorMain {
     
-    final static String BASE_PATH = "C:\\Users\\DjBos\\eclipse-workspace\\A3P1BingoGameProject";
+    final static String BASE_PATH = "C:\\Users\\Usuario\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject";
     
     final static int NUM_PLAYERS = 4;
     
@@ -37,7 +37,8 @@ public class BingoCardGeneratorMain {
     final static int CONSTANT_PLAYERS = 1;
     final static int RANDOM_PLAYERS = 2;
 
-    public static void main(String[] args) {
+    @SuppressWarnings({ "unused", "resource" })
+	public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
         PrintWriter writer;
         String playersFilename, cardsFilename;
@@ -98,7 +99,8 @@ public class BingoCardGeneratorMain {
         keyboard.close();
     }
     
-    static String[] loadPlayers(String filename) {
+    @SuppressWarnings("resource")
+	static String[] loadPlayers(String filename) {
         try {
             FileReader fr = new FileReader(filename);
             BufferedReader reader = new BufferedReader(fr);

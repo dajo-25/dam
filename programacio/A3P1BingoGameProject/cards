@@ -1,0 +1,30 @@
+#Number of players
+4
+#Players
+Rodolfo
+Climent
+Romualdo
+Ponça
+
+#Bingo cards size
+3 9
+#Bingo card 4
+@	@	25	@	47	51	63	@	92
+@	15	@	@	@	57	69	@	94
+@	13	@	38	41	54	@	83	@
+
+#Bingo card 3
+@	15	@	41	59	66	74	@	@
+@	@	23	@	54	61	70	@	98
+3	@	@	44	@	67	@	80	96
+
+#Bingo card 2
+9	12	21	@	@	@	@	78	83
+@	10	@	@	@	51	63	71	81
+@	18	23	@	49	@	64	@	84
+
+#Bingo card 1
+@	@	29	@	45	59	65	80	@
+@	@	22	34	46	@	@	87	96
+3	16	25	@	44	@	@	@	91
+
