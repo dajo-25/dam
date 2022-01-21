@@ -4,29 +4,36 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
-
-import javax.swing.text.PlainDocument;
-
 
 public class BingoMain {
 
+	final static int MAX_BINGO_NUMBER = 99;
+	final static String BASE_PATH = "C:\\Users\\Usuario\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject";
+	
+	//TODO Metode actualitzar estadístiques.
+	/* 3 arrays d'ints (contadors de partides, linies i bingos de cada jugador)
+	 * 1 array de jugadors (per a comparar i escriure)
+	 * contador de partides
+	 * 
+	 */
+	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-				
-		final int MAX_BINGO_NUMBER = 99;
 		
 		Scanner scan = new Scanner(System.in);
-		String matchPath = new String("C:\\Users\\Usuario\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject\\");
+		String matchPath;
 		
 		boolean[] balls = new boolean[MAX_BINGO_NUMBER + 1]; 
 		String [] players = null;
 		
+		String firstRowWinner = null;
+		String bingoWinner = null;
+		
 		boolean rowAnounced = false, bingoAnounced = false;
 		
 		System.out.println("Introdueixi el nom del fitxer de partida:");
-		matchPath += scan.nextLine();
+		matchPath = BASE_PATH + scan.nextLine();
 		
 		try {
 			
@@ -43,7 +50,9 @@ public class BingoMain {
 		try {
 			
 			for (int i = 0; i < cards.length; i++) {
-				cards[i] = BingoMain.loadCard(matchPath, 1);
+				
+				cards[i] = BingoMain.loadCard(matchPath, i+1);
+				
 			}	
 			
 		} catch (FileNotFoundException e) {
@@ -52,36 +61,88 @@ public class BingoMain {
 			System.out.println("Error I/O");
 		}
 		
+		System.out.println("Premi INTRO per a treure una bola");
+
 		while (!rowAnounced) {
 			
-			System.out.println("Premi INTRO per a treure una bola");
 			scan.nextLine();
 			
 			int currentBall = BingoMain.chooseBall(balls);
 			
+			System.out.println("----------------------------------------" +
+							 "\n----------------------------------------");
+			System.out.println("\nBOLES ANUNCIADES: \n" + announcedBalls(balls) + "\n");
 			System.out.println("BOLA: " + currentBall);
-			
 			System.out.println();
 			
-			System.out.println(Arrays.toString(balls));
 			for (int i = 0; i < cards.length; i++) {
+				
+				System.out.println("Tarja nº " + (i+1) + " (" + players[i] + ")" + ":");
+				System.out.println(BingoMain.cardToString(cards[i]));
+				System.out.println();
 				
 				if (BingoMain.rowCompleted(cards[i], BingoMain.findNumRow(cards[i], currentBall))) {
 					
 					rowAnounced = true;
+					firstRowWinner = players[i];
 					
 				}
 				
 			}
 			
+			if(!rowAnounced) {
+				System.out.println("Premi INTRO per a treure una bola");
+			}
+			
 		}
 		
-		System.out.println("Linia cantada!\n\n\nASDFSEAIJFASÑLFIJESFAWEF\n\n\n");
+		System.out.println("\n\n___________________________________\n\nLinia cantada! Guanyador/a: " + firstRowWinner + "\n___________________________________\n\n");
+		
+		System.out.println("Premi INTRO per a treure una bola");
+		
+		while (!bingoAnounced) {
+			
+			scan.nextLine();
+			
+			int currentBall = BingoMain.chooseBall(balls);
+			
+			System.out.println("----------------------------------------" +
+							 "\n----------------------------------------");
+			System.out.println("\nBOLES ANUNCIADES: \n" + announcedBalls(balls) + "\n");
+			System.out.println("BOLA: " + currentBall);
+			System.out.println();
+			
+			for (int i = 0; i < cards.length; i++) {
 				
+				System.out.println("Tarja nº " + (i+1) + " (" + players[i] + ")" + ":");
+				System.out.println(BingoMain.cardToString(cards[i]));
+				System.out.println();
+				
+				BingoMain.findNumRow(cards[i], currentBall);
+				
+				if (BingoMain.cardCompleted(cards[i])) {
+					
+					bingoAnounced = true;
+					bingoWinner = players[i];
+					
+				}
+				
+			}
+			
+			if (!bingoAnounced) {
+				System.out.println("Premi INTRO per a treure una bola");
+			}
+			
+		}
+		
+		System.out.println("\n\n___________________________________\n\nBingo cantat! Guanyador/a: " + bingoWinner + "\n___________________________________\n\n");
+		
+		BingoMain.updateStatistics(players, bingoWinner, firstRowWinner);
+		
 		scan.close();
 		
 	}
-	
+
 	private static String[] loadPlayers(String path) throws IOException {
 		
 		String [] players;
@@ -100,7 +161,7 @@ public class BingoMain {
 		bufferedReader.readLine();
 		
 		for (int i = 0; i < numOfPlayers; i++) {
-			players[i] = bufferedReader.readLine();
+			players[numOfPlayers - (i+1)] = bufferedReader.readLine();
 		}
 		
 		bufferedReader.close();
@@ -192,6 +253,7 @@ public class BingoMain {
 				
 				if(card[i][j] == ballNum) {
 					
+					card[i][j] = 0;
 					row = i;
 					
 				}
@@ -226,6 +288,8 @@ public class BingoMain {
 		return found;
 	}
 	
+	
+	
 	private static boolean cardCompleted(int[][] card) {
 		
 		boolean found = false;
@@ -248,6 +312,7 @@ public class BingoMain {
 		
 		return found;
 	}
+	
 
 	private static String cardToString(int[][] card) {
 		
@@ -265,6 +330,35 @@ public class BingoMain {
 		return cardString;
 	}
 	
+	private static String announcedBalls(boolean[] balls) {
+		
+		String announcedBalls = "[ ";
+		int ballsCount = 0;
+		
+		for (int i = 0; i < balls.length; i++) {
+			
+			if (balls[i]) {
+				
+				announcedBalls += i + " ";
+				ballsCount++;
+				
+				if (ballsCount%8 == 0) {
+					announcedBalls += "\n";
+				}
+				
+			}
+			
+		}
+		
+		announcedBalls += "]";
+		
+		return announcedBalls;
+	}
 	
+	private static void updateStatistics(String[] players, String bingoWinner, String firstRowWinner) {
+		
+		
+		
+	}
 	
 }

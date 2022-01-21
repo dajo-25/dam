@@ -1,62 +1,62 @@
-#NÃºmero de partides
+#Número de partides
 0
 
-#NÃºmero de jugadors
+#Número de jugadors
 17
 
-#NÃºmero de partides per jugador
+#Número de partides per jugador
 Gumersindo 0
 Celestina 0
 Pepito 0
-AntÃ²nia 0
+Antònia 0
 Filomena 0
-MagÃ­ 0
+Magí 0
 Ramona 0
 Romualdo 0
 Rodolfo 0
 Esclarmunda 0
-PonÃ§a 0
+Ponça 0
 Bonaventura 0
-QuintÃ­ 0
+Quintí 0
 Climent 0
 Francesca 0
 Ermengol 0
-GarbÃ­ 0
+Garbí 0
 
-#NÃºmero de primeres lÃ­nies per jugador
+#Número de primeres línies per jugador
 Gumersindo 0
 Celestina 0
 Pepito 0
-AntÃ²nia 0
+Antònia 0
 Filomena 0
-MagÃ­ 0
+Magí 0
 Ramona 0
 Romualdo 0
 Rodolfo 0
 Esclarmunda 0
-PonÃ§a 0
+Ponça 0
 Bonaventura 0
-QuintÃ­ 0
+Quintí 0
 Climent 0
 Francesca 0
 Ermengol 0
-GarbÃ­ 0
+Garbí 0
 
-#NÃºmero de victÃ²ries per jugador
+#Número de victòries per jugador
 Gumersindo 0
 Celestina 0
 Pepito 0
-AntÃ²nia 0
+Antònia 0
 Filomena 0
-MagÃ­ 0
+Magí 0
 Ramona 0
 Romualdo 0
 Rodolfo 0
 Esclarmunda 0
-PonÃ§a 0
+Ponça 0
 Bonaventura 0
-QuintÃ­ 0
+Quintí 0
 Climent 0
 Francesca 0
 Ermengol 0
-GarbÃ­ 0
+Garbí 0

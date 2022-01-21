@@ -65,19 +65,19 @@ public class BingoCardGeneratorMain {
             }
                     
             do {
-                System.out.println("Quin tipus de cartrÃ³ de Bingo vols?");
+                System.out.println("Quin tipus de cartr� de Bingo vols?");
                 System.out.println("\t" + SQUARE_OPTION + ". Quadrat (5x5) sense forats");
                 System.out.println("\t" + RECTANGULAR_OPTION + ". Rectangular (3x9) amb 12 forats");
-                System.out.print("OpciÃ³: ");
+                System.out.print("Opci�: ");
                 option = keyboard.nextInt();
                 if(option != SQUARE_OPTION && option != RECTANGULAR_OPTION) System.out.println("Error, torna a introduir el valor");
             } while(option != SQUARE_OPTION && option != RECTANGULAR_OPTION);
             
             do {
-                System.out.println("\nVols una partida de 4 jugafors o aleatÃ²ria?");
+                System.out.println("\nVols una partida de 4 jugafors o aleat�ria?");
                 System.out.println("\t" + CONSTANT_PLAYERS + ". Partida de 4 jugadors");
-                System.out.println("\t" + RANDOM_PLAYERS + ". Partida aleatÃ²ria");
-                System.out.print("OpciÃ³: ");
+                System.out.println("\t" + RANDOM_PLAYERS + ". Partida aleat�ria");
+                System.out.print("Opci�: ");
                 gameType = keyboard.nextInt();
                 if(gameType != CONSTANT_PLAYERS && gameType != RANDOM_PLAYERS) System.out.println("Error, torna a introduir el valor");
             } while(gameType != CONSTANT_PLAYERS && gameType != RANDOM_PLAYERS);
@@ -91,7 +91,7 @@ public class BingoCardGeneratorMain {
                     BingoCardGeneratorMain.generateRectangularCard(players, gameType, writer);
                     break;
                 default:
-                    System.out.println("OpciÃ³ incorrecta");
+                    System.out.println("Opci� incorrecta");
             }
             writer.close();
         }
