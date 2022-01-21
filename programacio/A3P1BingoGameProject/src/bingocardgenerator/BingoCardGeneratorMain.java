@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class BingoCardGeneratorMain {
     
-    final static String BASE_PATH = "C:\\Users\\Usuario\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject";
+    final static String BASE_PATH = "C:\\Users\\DjBos\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject";
     
     final static int NUM_PLAYERS = 4;
     
@@ -65,19 +65,19 @@ public class BingoCardGeneratorMain {
             }
                     
             do {
-                System.out.println("Quin tipus de cartró de Bingo vols?");
+                System.out.println("Quin tipus de cartrï¿½ de Bingo vols?");
                 System.out.println("\t" + SQUARE_OPTION + ". Quadrat (5x5) sense forats");
                 System.out.println("\t" + RECTANGULAR_OPTION + ". Rectangular (3x9) amb 12 forats");
-                System.out.print("Opció: ");
+                System.out.print("Opciï¿½: ");
                 option = keyboard.nextInt();
                 if(option != SQUARE_OPTION && option != RECTANGULAR_OPTION) System.out.println("Error, torna a introduir el valor");
             } while(option != SQUARE_OPTION && option != RECTANGULAR_OPTION);
             
             do {
-                System.out.println("\nVols una partida de 4 jugafors o aleatòria?");
+                System.out.println("\nVols una partida de 4 jugafors o aleatï¿½ria?");
                 System.out.println("\t" + CONSTANT_PLAYERS + ". Partida de 4 jugadors");
-                System.out.println("\t" + RANDOM_PLAYERS + ". Partida aleatòria");
-                System.out.print("Opció: ");
+                System.out.println("\t" + RANDOM_PLAYERS + ". Partida aleatï¿½ria");
+                System.out.print("Opciï¿½: ");
                 gameType = keyboard.nextInt();
                 if(gameType != CONSTANT_PLAYERS && gameType != RANDOM_PLAYERS) System.out.println("Error, torna a introduir el valor");
             } while(gameType != CONSTANT_PLAYERS && gameType != RANDOM_PLAYERS);
@@ -91,7 +91,7 @@ public class BingoCardGeneratorMain {
                     BingoCardGeneratorMain.generateRectangularCard(players, gameType, writer);
                     break;
                 default:
-                    System.out.println("Opció incorrecta");
+                    System.out.println("Opciï¿½ incorrecta");
             }
             writer.close();
         }

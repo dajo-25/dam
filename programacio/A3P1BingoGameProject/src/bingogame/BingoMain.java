@@ -3,28 +3,26 @@ package bingogame;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
+@SuppressWarnings("unused")
 public class BingoMain {
 
 	final static int MAX_BINGO_NUMBER = 99;
-	final static String BASE_PATH = "C:\\Users\\Usuario\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject";
+	final static String BASE_PATH = "C:\\Users\\DjBos\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject\\";
 	
-	//TODO Metode actualitzar estadístiques.
-	/* 3 arrays d'ints (contadors de partides, linies i bingos de cada jugador)
-	 * 1 array de jugadors (per a comparar i escriure)
-	 * contador de partides
-	 * 
-	 */
-	
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
 		String matchPath;
 		
-		boolean[] balls = new boolean[MAX_BINGO_NUMBER + 1]; 
+		boolean[] balls = new boolean[MAX_BINGO_NUMBER + 1];
+		
+		int[] ballsPoolExtension = BingoMain.createBallsPoolExtension(MAX_BINGO_NUMBER);
+				
 		String [] players = null;
 		
 		String firstRowWinner = null;
@@ -67,11 +65,24 @@ public class BingoMain {
 			
 			scan.nextLine();
 			
-			int currentBall = BingoMain.chooseBall(balls);
+			int currentBall;
 			
+			//CHOOSING BALL (COMMENT THE METHOD NOT NEEDED)
+			//Method 1:
+			//currentBall = BingoMain.chooseBall(balls);
+			//Metod 2:
+			currentBall = BingoMain.chooseBallExtension(ballsPoolExtension);
+						
 			System.out.println("----------------------------------------" +
 							 "\n----------------------------------------");
-			System.out.println("\nBOLES ANUNCIADES: \n" + announcedBalls(balls) + "\n");
+			
+			
+			//SHOWING ANNOUNCED BALLS(COMMENT THE METHOD NOT NEEDED)
+			//Method 1:
+			//System.out.println("\nBOLES ANUNCIADES: \n" + announcedBalls(balls) + "\n");
+			//Method 2:
+			System.out.println("\nBOLES ANUNCIADES: \n" + announcedBallsExtension(ballsPoolExtension) + "\n");
+
 			System.out.println("BOLA: " + currentBall);
 			System.out.println();
 			
@@ -96,7 +107,7 @@ public class BingoMain {
 			
 		}
 		
-		System.out.println("\n\n___________________________________\n\nLinia cantada! Guanyador/a: " + firstRowWinner + "\n___________________________________\n\n");
+		System.out.println("\n___________________________________\n\nLinia cantada! Guanyador/a: " + firstRowWinner + "\n___________________________________\n\n");
 		
 		System.out.println("Premi INTRO per a treure una bola");
 		
@@ -104,11 +115,23 @@ public class BingoMain {
 			
 			scan.nextLine();
 			
-			int currentBall = BingoMain.chooseBall(balls);
+			int currentBall;
+			
+			//CHOOSING BALL (COMMENT THE METHOD NOT NEEDED)
+			//Method 1:
+			//currentBall = BingoMain.chooseBall(balls);
+			//Metod 2:
+			currentBall = BingoMain.chooseBallExtension(ballsPoolExtension);
 			
 			System.out.println("----------------------------------------" +
 							 "\n----------------------------------------");
-			System.out.println("\nBOLES ANUNCIADES: \n" + announcedBalls(balls) + "\n");
+			
+			//SHOWING ANNOUNCED BALLS(COMMENT THE METHOD NOT NEEDED)
+			//Method 1:
+			//System.out.println("\nBOLES ANUNCIADES: \n" + announcedBalls(balls) + "\n");
+			//Method 2:
+			System.out.println("\nBOLES ANUNCIADES: \n" + announcedBallsExtension(ballsPoolExtension) + "\n");
+
 			System.out.println("BOLA: " + currentBall);
 			System.out.println();
 			
@@ -135,9 +158,15 @@ public class BingoMain {
 			
 		}
 		
-		System.out.println("\n\n___________________________________\n\nBingo cantat! Guanyador/a: " + bingoWinner + "\n___________________________________\n\n");
+		System.out.println("\n___________________________________\n\nBingo cantat! Guanyador/a: " + bingoWinner + "\n___________________________________\n\n");
 		
-		BingoMain.updateStatistics(players, bingoWinner, firstRowWinner);
+		try {
+			
+			BingoMain.updateStatistics(players, bingoWinner, firstRowWinner);
+			
+		} catch (IOException e) {
+			System.out.println("No s'han pogut actualitzar les estadístiques (ERROR I/O)");;
+		}
 		
 		scan.close();
 		
@@ -224,6 +253,7 @@ public class BingoMain {
 	}
 	*/
 	
+	@SuppressWarnings("unused")
 	private static int chooseBall(boolean[] balls) {
 		
 		int choosenBall;
@@ -288,8 +318,6 @@ public class BingoMain {
 		return found;
 	}
 	
-	
-	
 	private static boolean cardCompleted(int[][] card) {
 		
 		boolean found = false;
@@ -313,7 +341,6 @@ public class BingoMain {
 		return found;
 	}
 	
-
 	private static String cardToString(int[][] card) {
 		
 		String cardString = new String();
@@ -339,12 +366,12 @@ public class BingoMain {
 			
 			if (balls[i]) {
 				
-				announcedBalls += i + " ";
-				ballsCount++;
-				
-				if (ballsCount%8 == 0) {
+				if (ballsCount%8 == 0 && ballsCount != 0) {
 					announcedBalls += "\n";
 				}
+				
+				announcedBalls += i + " ";
+				ballsCount++;
 				
 			}
 			
@@ -355,10 +382,180 @@ public class BingoMain {
 		return announcedBalls;
 	}
 	
-	private static void updateStatistics(String[] players, String bingoWinner, String firstRowWinner) {
+	private static void updateStatistics(String[] players, String bingoWinner, String firstRowWinner) throws IOException {
 		
+		FileReader fileReader = new FileReader(BASE_PATH + "bingo_statistics.txt");
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
 		
+		bufferedReader.readLine();
+		int totalMatchCount = Integer.parseInt(bufferedReader.readLine());
+		totalMatchCount++;
 		
+		bufferedReader.readLine();
+		bufferedReader.readLine();
+		int playerAmount = Integer.parseInt(bufferedReader.readLine());
+		
+		int[] playerMatchCount = new int[playerAmount];
+		int[] playerRowCount = new int[playerAmount];
+		int[] playerBingoCount = new int[playerAmount];
+		
+		String[] allPlayers = new String[playerAmount];
+
+		bufferedReader.readLine();
+		bufferedReader.readLine();
+		
+		for (int i = 0; i < playerMatchCount.length; i++) {
+			
+			String currentLine = bufferedReader.readLine();
+			
+			playerMatchCount[i] = Integer.parseInt(currentLine.split(" ")[1]);
+			allPlayers[i] = currentLine.split(" ")[0];
+			
+			for (int j = 0; j < players.length; j++) {
+				
+				if (currentLine.split(" ")[0].equalsIgnoreCase(players[j])) {
+					
+					playerMatchCount[i]++;
+					
+				}
+				
+			}
+			
+		}
+		
+		bufferedReader.readLine();
+		bufferedReader.readLine();
+		
+		for (int i = 0; i < playerRowCount.length; i++) {
+			
+			String currentLine = bufferedReader.readLine();
+			
+			playerRowCount[i] = Integer.parseInt(currentLine.split(" ")[1]);
+			
+			if (currentLine.split(" ")[0].equalsIgnoreCase(firstRowWinner)) {
+				
+				playerRowCount[i]++;
+				
+			}
+			
+		}
+
+		bufferedReader.readLine();
+		bufferedReader.readLine();
+		
+		for (int i = 0; i < playerBingoCount.length; i++) {
+	
+			String currentLine = bufferedReader.readLine();
+			
+			playerBingoCount[i] = Integer.parseInt(currentLine.split(" ")[1]);
+	
+			if (currentLine.split(" ")[0].equalsIgnoreCase(bingoWinner)) {
+				
+				playerBingoCount[i]++;
+				
+			}
+			
+		}
+		
+		bufferedReader.close();
+		fileReader.close();
+		
+		FileWriter fileWriter = new FileWriter(BASE_PATH + "bingo_statistics.txt");
+		PrintWriter printWriter = new PrintWriter(fileWriter);
+		
+		printWriter.println("#Número de partides");
+		printWriter.println(totalMatchCount);
+		printWriter.println();
+		printWriter.println("#Número de jugadors");
+		printWriter.println(playerAmount);
+		printWriter.println();
+		printWriter.println("#Número de partides per jugador");
+		
+		for (int i = 0; i < allPlayers.length; i++) {
+			
+			printWriter.println(allPlayers[i] + " " + playerMatchCount[i]);
+			
+		}
+		
+		printWriter.println();
+		printWriter.println("#Número de primeres línies per jugador");
+		
+		for (int i = 0; i < allPlayers.length; i++) {
+			
+			printWriter.println(allPlayers[i] + " " + playerRowCount[i]);
+			
+		}
+		
+		printWriter.println();
+		printWriter.println("#Número de victòries per jugador");
+		
+		for (int i = 0; i < allPlayers.length; i++) {
+			
+			printWriter.println(allPlayers[i] + " " + playerBingoCount[i]);
+			
+		}
+		
+		printWriter.close();
+		fileWriter.close();
+		
+	}
+	
+	private static int[] createBallsPoolExtension(int maxNum) {
+		
+		int[] ballsPool = new int [maxNum + 1];
+		
+		for (int i = 0; i < ballsPool.length; i++) {
+			
+			ballsPool[i] = i+1;
+			
+		}
+		
+		ballsPool[ballsPool.length - 1] = 0;
+		
+		//SHUFFELING AS MANY TIMES AS BALLS THERE IS
+		for (int i = 0; i < ballsPool.length; i++) {
+			
+			int randPos1 = (int) (Math.round(Math.random() * (maxNum - 2)));
+			int randPos2 = (int) (Math.round(Math.random() * (maxNum - 2)));
+			
+			int tmp = ballsPool[randPos1];
+			ballsPool[randPos1] = ballsPool[randPos2];
+			ballsPool[randPos2] = tmp;	
+			
+		}
+		
+		return ballsPool;
+	}
+
+	private static int chooseBallExtension(int[] ballsPool) {
+		
+		int choosenBall;
+				
+			choosenBall = ballsPool[(ballsPool[ballsPool.length-1])];
+			ballsPool[(ballsPool.length - 1)]++;
+		
+		return choosenBall;
+	}
+	
+	private static String announcedBallsExtension(int[] ballsPool) {
+		
+		String announcedBalls = "[ ";
+		int ballsCount = 0;
+		
+		for (int i = 0; i < (ballsPool[ballsPool.length - 1]); i++) {
+			
+			if (ballsCount%8 == 0 && ballsCount != 0) {
+				announcedBalls += "\n";
+			}
+				
+			announcedBalls += ballsPool[i] + " ";
+			ballsCount++;
+				
+		}
+		
+		announcedBalls += "]";
+		
+		return announcedBalls;
 	}
 	
 }
