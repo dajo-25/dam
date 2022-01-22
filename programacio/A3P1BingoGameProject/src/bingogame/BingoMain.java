@@ -1,3 +1,38 @@
+/* Bingo Game Project
+ * Author: David Jové Bosch
+ * 
+ * This code throws a bingo game according to a specified file.
+ * 
+ * Files are created by class BingoCardGeneratorMain. This class
+ * reads a file called "players.txt" that contains the players among which some
+ * will be chosen to enrol in the match. This code also configures the type of
+ * cards the players will be using (5x5 or 9x3).
+ * 
+ * When BingoMain.java reads the file, it loads it's players in a String array
+ * and the cards in a int three-dimensional Array (an Array of two-dimensional
+ * Arrays, the cards).
+ * 
+ * Two boolean are created and set to false. This booleans will keep track of whether
+ * the first row and the bingo have been announced or not. The state of this booleans
+ * will define the block of code running.
+ * 
+ * Then, the game begins. The execution flow will enter the loop block that has to be
+ * running while the first row hasn't been announced. The method chooseBall() will 
+ * assign the announced ball value into the variable currentBall. Then, the code
+ * will look for the selected value in each card. If it is found, the position of
+ * the card will be set to 0 and the rowCompleted() function will check if the
+ * row is completed. If not, the loop will run again selecting another ball, otherwise,
+ * the variable rowAnnounced will be set to true and the execution flow exit the
+ * rowAnnounced loop and enter the bingoAnnounced loop.
+ * 
+ * The following code will run mostly the same way, but instead of checking for the row
+ * containing the value announced, it will check the whole card. Once one of the cards
+ * is completely set to 0, bingoAnnounced will be set to true, and the execution flow
+ * will exit the loop and end.
+ * 
+ * Each function is briefly described.
+ */
+
 package bingogame;
 
 import java.io.BufferedReader;
@@ -12,37 +47,36 @@ import java.util.Scanner;
 public class BingoMain {
 
 	final static int MAX_BINGO_NUMBER = 99;
-	final static String BASE_PATH = "C:\\Users\\DjBos\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject\\";
+	final static String BASE_PATH = "C:\\Users\\Usuario\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject\\";
 	
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
-		String matchPath;
 		
 		boolean[] balls = new boolean[MAX_BINGO_NUMBER + 1];
-		
 		int[] ballsPoolExtension = BingoMain.createBallsPoolExtension(MAX_BINGO_NUMBER);
-				
-		String [] players = null;
 		
 		String firstRowWinner = null;
 		String bingoWinner = null;
 		
-		boolean rowAnounced = false, bingoAnounced = false;
-		
+		//SELECTING MATCH CONFIGURATION
 		System.out.println("Introdueixi el nom del fitxer de partida:");
-		matchPath = BASE_PATH + scan.nextLine();
+		String matchPath = BASE_PATH + scan.nextLine();
+		
+		//LOADING PLAYERS
+		String [] players = null;
 		
 		try {
 			
 			 players = BingoMain.loadPlayers(matchPath);
 			 
 		} catch (FileNotFoundException e) {
-			System.out.println("No s'ha trobat el fitxer");
+			System.out.println("No s'ha trobat el fitxer (COMPROVA BASE_PATH)");
 		} catch (IOException e) {
 			System.out.println("Error I/O");
 		}
 		
+		//LOADING CARDS
 		int[][][] cards = new int[players.length][][];
 		
 		try {
@@ -54,38 +88,47 @@ public class BingoMain {
 			}	
 			
 		} catch (FileNotFoundException e) {
-			System.out.println("No s'ha trobat el fitxer");
+			System.out.println("No s'ha trobat el fitxer (COMPROVA BASE_PATH)");
 		} catch (IOException e) {
 			System.out.println("Error I/O");
 		}
 		
+		
 		System.out.println("Premi INTRO per a treure una bola");
-
+		
+		boolean rowAnounced = false, bingoAnounced = false;
+		
 		while (!rowAnounced) {
 			
 			scan.nextLine();
 			
 			int currentBall;
 			
-			//CHOOSING BALL (COMMENT THE METHOD NOT NEEDED)
-			//Method 1:
-			//currentBall = BingoMain.chooseBall(balls);
-			//Metod 2:
-			currentBall = BingoMain.chooseBallExtension(ballsPoolExtension);
-						
 			System.out.println("----------------------------------------" +
-							 "\n----------------------------------------");
-			
-			
-			//SHOWING ANNOUNCED BALLS(COMMENT THE METHOD NOT NEEDED)
+					 "\n----------------------------------------");
+	
+		//SHOWING ANNOUNCED BALLS(COMMENT THE METHOD NOT NEEDED)
+	
 			//Method 1:
 			//System.out.println("\nBOLES ANUNCIADES: \n" + announcedBalls(balls) + "\n");
+	
 			//Method 2:
-			System.out.println("\nBOLES ANUNCIADES: \n" + announcedBallsExtension(ballsPoolExtension) + "\n");
+			System.out.println("\nBOLES ANUNCIADES ANTERIORMENT: \n" + announcedBallsExtension(ballsPoolExtension) + "\n");
 
+			
+		//CHOOSING BALL (COMMENT THE METHOD NOT NEEDED)
+			
+			//Method 1:
+			//currentBall = BingoMain.chooseBall(balls);
+			
+			//Metod 2:
+			currentBall = BingoMain.chooseBallExtension(ballsPoolExtension);
+			
+			
 			System.out.println("BOLA: " + currentBall);
 			System.out.println();
 			
+		//CARD PRINTING AND CHECKING
 			for (int i = 0; i < cards.length; i++) {
 				
 				System.out.println("Tarja nº " + (i+1) + " (" + players[i] + ")" + ":");
@@ -111,30 +154,38 @@ public class BingoMain {
 		
 		System.out.println("Premi INTRO per a treure una bola");
 		
+		
 		while (!bingoAnounced) {
 			
 			scan.nextLine();
 			
 			int currentBall;
 			
-			//CHOOSING BALL (COMMENT THE METHOD NOT NEEDED)
+			System.out.println("----------------------------------------" +
+					 "\n----------------------------------------");
+	
+		//SHOWING ANNOUNCED BALLS(COMMENT THE METHOD NOT NEEDED)
+	
+			//Method 1:
+			//System.out.println("\nBOLES ANUNCIADES: \n" + announcedBalls(balls) + "\n");
+	
+			//Method 2:
+			System.out.println("\nBOLES ANUNCIADES ANTERIORMENT: \n" + announcedBallsExtension(ballsPoolExtension) + "\n");
+	
+			
+		//CHOOSING BALL (COMMENT THE METHOD NOT NEEDED)
+			
 			//Method 1:
 			//currentBall = BingoMain.chooseBall(balls);
+			
 			//Metod 2:
 			currentBall = BingoMain.chooseBallExtension(ballsPoolExtension);
 			
-			System.out.println("----------------------------------------" +
-							 "\n----------------------------------------");
 			
-			//SHOWING ANNOUNCED BALLS(COMMENT THE METHOD NOT NEEDED)
-			//Method 1:
-			//System.out.println("\nBOLES ANUNCIADES: \n" + announcedBalls(balls) + "\n");
-			//Method 2:
-			System.out.println("\nBOLES ANUNCIADES: \n" + announcedBallsExtension(ballsPoolExtension) + "\n");
-
 			System.out.println("BOLA: " + currentBall);
 			System.out.println();
 			
+		//CARD PRINTING AND CHECKING
 			for (int i = 0; i < cards.length; i++) {
 				
 				System.out.println("Tarja nº " + (i+1) + " (" + players[i] + ")" + ":");
@@ -160,6 +211,7 @@ public class BingoMain {
 		
 		System.out.println("\n___________________________________\n\nBingo cantat! Guanyador/a: " + bingoWinner + "\n___________________________________\n\n");
 		
+		//UPDATING STATISTICS
 		try {
 			
 			BingoMain.updateStatistics(players, bingoWinner, firstRowWinner);
@@ -247,11 +299,13 @@ public class BingoMain {
 		return card;
 	}
 	
-	/*
+	/* This function was suggested in the third point of the project guide,
+	 * but I considered it was unnecessary setting up a function just to create
+	 * a plain array of booleans set to false.
+	 */
 	private static void setNumbers() {
 		
 	}
-	*/
 	
 	@SuppressWarnings("unused")
 	private static int chooseBall(boolean[] balls) {

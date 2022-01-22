@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class BingoCardGeneratorMain {
     
-    final static String BASE_PATH = "C:\\Users\\DjBos\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject";
+    final static String BASE_PATH = "C:\\Users\\Usuario\\Desktop\\A_GITHUB\\dam\\programacio\\A3P1BingoGameProject";
     
     final static int NUM_PLAYERS = 4;
     
