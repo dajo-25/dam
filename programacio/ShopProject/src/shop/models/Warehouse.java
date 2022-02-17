@@ -7,6 +7,8 @@ public class Warehouse {
 	private ArrayList<Product> products = new ArrayList<Product>();
 	private ArrayList<Integer> quantities = new ArrayList<Integer>();
 	
+	
+	//CONSTRUCTORS
 	public Warehouse() {
 		
 		this.products.clear();
@@ -43,5 +45,47 @@ public class Warehouse {
 		this.quantities = new ArrayList<>(quantities);
 		
 	}
+
+	
+	////GETTERS AND SETTERS
+	public ArrayList<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(ArrayList<Product> products) {
+		this.products = products;
+	}
+
+	public ArrayList<Integer> getQuantities() {
+		return quantities;
+	}
+
+	public void setQuantities(ArrayList<Integer> quantities) {
+		this.quantities = quantities;
+	}
+
+	
+	//EQUALS AND TOSTRING
+	public boolean equals(Warehouse otherWarehouse) {
+		
+		boolean output = false;
+		
+		if (this.products.equals(otherWarehouse.products) &&
+				this.quantities.equals(otherWarehouse.quantities)) {
+			
+			output = true;
+			
+		}
+		
+		return output;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "Warehouse [products=" + products + ", quantities=" + quantities + "]";
+	}
+	
+	
 	
 }

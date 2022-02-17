@@ -1,5 +1,7 @@
 package shop.main;
 
+import java.util.ArrayList;
+
 import shop.models.Product;
 import shop.models.Warehouse;
 
@@ -14,9 +16,16 @@ public class DebuggingMain {
 		System.out.println(product1.toString());
 		System.out.println(product2.toString());
 		
+		ArrayList<Product> products = new ArrayList<Product>();
+		
+		products.add(product1);
+		products.add(product2);
+		
 		Warehouse warehouseChicago = new Warehouse();
 		
+		warehouseChicago.setProducts(products);
 		
+		System.out.println(warehouseChicago.toString());
 		
 		
 	}

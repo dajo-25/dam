@@ -77,6 +77,7 @@ public class Product {
 
 	
 	//TO STRING
+	@Override
 	public String toString() {
 		return "Product [barCode=" + barCode + ", description=" + description + ", price=" + price + "]";
 	}
