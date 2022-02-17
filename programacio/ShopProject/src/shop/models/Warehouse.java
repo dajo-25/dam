@@ -21,11 +21,8 @@ public class Warehouse {
 		this.products.clear();
 		
 		for (int i = 0; i < otherWarehouse.products.size(); i++) {
-			
-			Product tmpProduct = otherWarehouse.products.get(i);
-			
-			this.products.add(new Product(tmpProduct.getBarCode(), tmpProduct.getDescription(), tmpProduct.getPrice()));
-			this.products.add(new Product(tmpProduct));
+									
+			this.products.add(new Product(otherWarehouse.products.get(i)));
 			
 		}
 		
