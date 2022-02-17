@@ -83,9 +83,57 @@ public class Warehouse {
 	
 	@Override
 	public String toString() {
-		return "Warehouse [products=" + products + ", quantities=" + quantities + "]";
+		return "\nWarehouse \n[products=" + products + ", \nquantities=" + quantities + "]";
 	}
 	
 	
+	//METHODS
+	public boolean addProduct(Product newProduct) {
+		
+		boolean output = true;
+		
+		for (int i = 0; i < this.products.size(); i++) {
+			
+			if (this.products.get(i).equals(newProduct)) {
+				
+				output = false;
+				
+			}
+			
+		}
+		
+		if (output) {
+			
+			this.products.add(newProduct);
+			this.quantities.add(0);
+			
+		}
+		
+		return output;
+	}
+	
+	public void addProduct(Product newProduct, int quantity) {
+		
+		boolean productExists = false;
+		
+		for (int i = 0; i < this.products.size(); i++) {
+			
+			if (this.products.get(i).equals(newProduct)) {
+				
+				this.quantities.set(i, this.quantities.get(i) + quantity);
+				productExists = true;
+				
+			}
+			
+		}
+		
+		if (!productExists) {
+			
+			this.products.add(newProduct);
+			this.quantities.add(quantity);
+			
+		}
+		
+	}
 	
 }
