@@ -38,7 +38,10 @@ public class Warehouse {
 
 	public Warehouse(ArrayList<Product> products, ArrayList<Integer> quantities) {
 		
-		this.products = new ArrayList<>(products);
+		for (int i = 0; i < products.size(); i++) {
+			this.products.add(new Product(products.get(i)));
+		}
+		
 		this.quantities = new ArrayList<>(quantities);
 		
 	}
@@ -77,7 +80,6 @@ public class Warehouse {
 		return output;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "\nWarehouse \n[products=" + products + ", \nquantities=" + quantities + "]";
@@ -132,5 +134,97 @@ public class Warehouse {
 		}
 		
 	}
+	
+	public boolean deleteProduct(String barcode) {
+		
+		boolean output = false;
+		
+		for (int i = 0; i < this.products.size(); i++) {
+			
+			if (this.products.get(i).getBarCode().equals(barcode)) {
+				
+				this.products.remove(i);
+				this.quantities.remove(i);
+				
+				output = true;
+			}
+			
+		}
+		
+		return output;
+	}
+
+	public boolean reduceProduct(String barcode, int quantity) {
+		
+		boolean output = false;
+		
+		for (int i = 0; i < this.products.size(); i++) {
+			
+			if (this.products.get(i).getBarCode().equals(barcode) &&
+					this.quantities.get(i) >= quantity) {
+				
+				this.quantities.set(i, this.quantities.get(i) - quantity);
+				
+				output = true;
+			}
+			
+		}
+		
+		return output;
+	}
+
+	public ArrayList<Product> getProductsForReestock() {
+		
+		ArrayList<Product> productsForReestock = new ArrayList<>();
+		
+		for (int i = 0; i < this.quantities.size(); i++) {
+			
+			if (this.quantities.get(i) <= 5) {
+				
+				productsForReestock.add(new Product(this.products.get(i)));
+				
+			}
+			
+		}
+		
+		return productsForReestock;
+	}
+
+	public ArrayList<Product> getAvailableProducts() {
+		
+		ArrayList<Product> productsAvailable = new ArrayList<>();
+		
+		for (int i = 0; i < this.quantities.size(); i++) {
+			
+			if (this.quantities.get(i) >= 1) {
+				
+				productsAvailable.add(new Product(this.products.get(i)));
+				
+			}
+			
+		}
+		
+		return productsAvailable;
+		
+	}
+		
+	public Product getProduct(String barcode) {
+		
+		Product targetProduct = null;
+		
+		for (int i = 0; i < this.products.size(); i++) {
+			
+			if (this.products.get(i).getBarCode().equals(barcode)) {
+				
+				targetProduct = new Product(this.products.get(i));
+				
+				
+			}
+			
+		}
+		
+		return targetProduct;
+	}
+
 	
 }

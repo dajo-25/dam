@@ -15,24 +15,18 @@ public class DebuggingMain {
 		
 		Warehouse warehouseChicago = new Warehouse();
 		
-		warehouseChicago.addProduct(product1);
+		warehouseChicago.addProduct(product1, 4);
+		warehouseChicago.addProduct(product2, 5);
 		
-		System.out.println(warehouseChicago.toString());
+		Warehouse warehouseLosAngeles = new Warehouse(warehouseChicago);
+		Warehouse warehouseBoston = new Warehouse(warehouseChicago.getProducts(), warehouseChicago.getQuantities());
 		
-		warehouseChicago.addProduct(product2);
+		warehouseChicago.addProduct(product1, 9);
+		warehouseChicago.getProducts().get(0).setDescription("Poma blava");
 		
-		System.out.println(warehouseChicago.toString());
-
-		warehouseChicago.addProduct(product2);
-		warehouseChicago.addProduct(product2, 4);
+		System.out.println(warehouseChicago + "" + warehouseLosAngeles + "" + warehouseBoston);
 		
-		System.out.println(warehouseChicago.toString());
-
-		warehouseChicago.addProduct(product2, 2);
 		
-		warehouseChicago.addProduct(new Product("34111", "Poma blava", 10.30f), 10);
-		
-		System.out.println(warehouseChicago.toString());
 
 		
 	}
