@@ -15,7 +15,10 @@ public class Product {
 		
 	}
 	
-	//COPY CONSTRUCTOR
+	/**
+	 * DEEP COPY CONSTRUCTOR
+	 * @param otherProduct
+	 */
 	public Product(Product otherProduct) {
 		
 		this.barCode = otherProduct.barCode;
