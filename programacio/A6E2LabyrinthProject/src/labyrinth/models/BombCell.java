@@ -38,8 +38,9 @@ public class BombCell extends Cell {
 			
 		}else {
 			
-			if (p.powerUpsContains(PowerUp.WATER_BALLON)) {
+			if (p.getPowerUpQuantity(PowerUp.WATER_BALLON) > 0) {
 				
+				p.usePower(PowerUp.WATER_BALLON);
 				disableBomb();
 				openCell();
 				traverseMessage = super.toString() + "\nS'ha desactivat i el jugador s'ha salvat.";

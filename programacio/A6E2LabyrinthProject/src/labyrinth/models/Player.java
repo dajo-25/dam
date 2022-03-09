@@ -24,9 +24,7 @@ public class Player {
 		this.labyrinthCols = 0;
 		this.labyrinthRows = 0;
 		this.powersUps = new int[] {0, 0, 0, 0};
-		for (int i = 0; i < 3; i++) {
-			addPowerUp();
-		}
+		initializeInitPower();
 		
 	}
 	
@@ -38,9 +36,7 @@ public class Player {
 		this.labyrinthCols = labyrinthCols;
 		this.labyrinthRows = labyrinthRows;
 		this.powersUps = new int[] {0, 0, 0, 0};
-		for (int i = 0; i < 3; i++) {
-			addPowerUp();
-		}
+		initializeInitPower();
 		
 	}
 	
@@ -66,7 +62,7 @@ public class Player {
 			switch (mov) {
 			case 'U':
 				
-				if (!topBound()) {
+				if (this.row > 0) {
 					
 					this.row--;
 					
@@ -78,7 +74,7 @@ public class Player {
 
 			case 'D':
 				
-				if (!downBound()) {
+				if (this.row < labyrinthRows) {
 					
 					this.row++;
 					
@@ -89,7 +85,7 @@ public class Player {
 				break;
 				
 			case 'R':
-				if (!rightBound()) {
+				if (this.col < labyrinthCols) {
 					
 					this.col++;
 					
@@ -99,7 +95,7 @@ public class Player {
 				break;
 				
 			case 'L':
-				if (!leftBound()) {
+				if (this.col > 0) {
 					this.col--;
 				}else {
 					return false;
@@ -110,6 +106,8 @@ public class Player {
 				return false;
 				
 			}
+			
+			return true;
 			
 		}else {
 			
@@ -163,6 +161,20 @@ public class Player {
 		
 	}
 	
+	public boolean usePower(PowerUp powerUp) {
+		
+		if (this.powersUps[powerUp.ordinal()] > 0) {
+			
+			this.powersUps[powerUp.ordinal()]--;
+			return true;
+			
+		}else {
+			
+			return false;
+		}
+		
+	}
+	
 	public void addPowerUp() {
 		
 		this.powersUps[(int) Math.round(Math.random() * PowerUp.values().length)]++;
@@ -172,6 +184,14 @@ public class Player {
 	public void addPowerUp(PowerUp newPowerUp) {
 		
 		this.powersUps[newPowerUp.ordinal()]++;
+		
+	}
+	
+	public void initializeInitPower() {
+		
+		for (int i = 0; i < 3; i++) {
+			addPowerUp();
+		}
 		
 	}
 	

@@ -38,8 +38,9 @@ public class TrapCell extends Cell {
 			
 		}else {
 			
-			if (p.powerUpsContains(PowerUp.KNIFE)) {
+			if (p.getPowerUpQuantity(PowerUp.KNIFE) > 0) {
 				
+				p.usePower(PowerUp.KNIFE);
 				cutRope();
 				openCell();
 				traverseMessage = super.toString() + "\nS'ha pogut tallar la corda i el jugador pot escapar";

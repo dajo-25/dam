@@ -38,8 +38,9 @@ public class MonsterCell extends Cell {
 			
 		}else {
 			
-			if (p.powerUpsContains(PowerUp.FLUTE)) {
+			if (p.getPowerUpQuantity(PowerUp.FLUTE) > 0) {
 				
+				p.usePower(PowerUp.FLUTE);
 				tameBeast();
 				openCell();
 				traverseMessage = super.toString() + "\nS'ha amansat la fera i el jugador pot continuar de puntetes.";

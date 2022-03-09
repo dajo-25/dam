@@ -38,8 +38,9 @@ public class WellCell extends Cell {
 			
 		}else {
 			
-			if (p.powerUpsContains(PowerUp.JUMPER_BOOTS)) {
+			if (p.getPowerUpQuantity(PowerUp.JUMPER_BOOTS) > 0) {
 				
+				p.usePower(PowerUp.JUMPER_BOOTS);
 				jumpOver();
 				openCell();
 				traverseMessage = super.toString() + "\nS'ha pogut saltar per sobre i el jugador pot continuar.";
