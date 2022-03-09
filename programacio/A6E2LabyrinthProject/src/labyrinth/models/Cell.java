@@ -1,6 +1,6 @@
 package labyrinth.models;
 
-import labyrinth.enums.CellType;
+import labyrinth.tools.CellType;
 
 public abstract class Cell {
 	
@@ -80,8 +80,7 @@ public abstract class Cell {
 	
 	@Override
 	public String toString() {
-		return "Cell [row=" + row + ", col=" + col + ", type=" + type + ", opened=" + opened + ", traverseMessage="
-				+ traverseMessage + "]";
+		return "Cell [" + row + ", " + col + "] Type: " + type;
 	}
 
 	
