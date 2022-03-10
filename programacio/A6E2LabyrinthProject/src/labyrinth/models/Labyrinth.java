@@ -53,14 +53,78 @@ public class Labyrinth {
 			String[] cells = bufferedReader.readLine().split(" ");
 			for (int j = 0; j < ncols; j++) {
 				
-				swi
+				switch (Integer.parseInt(cells[j])) {
+				case 0:
+					
+					labyrinth[i][j] = new NormalEnterCell(i, j);
+					
+					break;
+
+				case 1:
+					
+					labyrinth[i][j] = new NormalExitCell(i, j);
+					
+					break;
+					
+				case 2:
+					
+					labyrinth[i][j] = new NormalCell(i, j);
+					
+					break;
+					
+				case 3:
+					
+					labyrinth[i][j] = new BombCell(i, j);
+					
+					break;
+					
+				case 4:
+					
+					labyrinth[i][j] = new TrapCell(i, j);
+					
+					break;
+					
+				case 5:
+					
+					labyrinth[i][j] = new WellCell(i, j);
+					
+					break;
+					
+				case 6:
+					
+					labyrinth[i][j] = new TeleportationCell(i, j);
+					
+					break;
+					
+				case 7:
+					
+					labyrinth[i][j] = new MonsterCell(i, j);
+					
+					break;
+					
+				case 8:
+					
+					labyrinth[i][j] = new PowerUpCell(i, j);
+					
+					break;
+				default:
+					break;
+				}
 				
 			}
 			
 		}
+		bufferedReader.close();
 		
 		return true;
 	}
+	
+	public boolean createLabyrinth(String fileName) {
+		
+		
+		
+	}
+	
 	
 	
 }
