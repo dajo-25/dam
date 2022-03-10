@@ -15,6 +15,20 @@ public class DebuggingMain {
 			e.printStackTrace();
 		}
 		
+		Labyrinth lab = new Labyrinth();
+		try {
+			lab.loadLabyrinth("prova.txt");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		lab.startGame("caca");
+		
+		
+		
+		System.out.println(lab.toString());
+		lab.toString();
+		
 	}
 
 }

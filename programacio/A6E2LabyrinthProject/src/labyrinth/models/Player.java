@@ -1,6 +1,7 @@
 package labyrinth.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import labyrinth.tools.PowerUp;
 
@@ -177,7 +178,7 @@ public class Player {
 	
 	public void addPowerUp() {
 		
-		this.powersUps[(int) Math.round(Math.random() * PowerUp.values().length)]++;
+		this.powersUps[(int) Math.round(Math.random() * (PowerUp.values().length-1))]++;
 		
 	}
 	
