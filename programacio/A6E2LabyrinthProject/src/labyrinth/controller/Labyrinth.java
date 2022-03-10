@@ -1,9 +1,23 @@
-package labyrinth.models;
+package labyrinth.controller;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+
+import labyrinth.models.BombCell;
+import labyrinth.models.Cell;
+import labyrinth.models.MonsterCell;
+import labyrinth.models.NormalCell;
+import labyrinth.models.NormalEnterCell;
+import labyrinth.models.NormalExitCell;
+import labyrinth.models.Player;
+import labyrinth.models.PowerUpCell;
+import labyrinth.models.TeleportationCell;
+import labyrinth.models.TrapCell;
+import labyrinth.models.WellCell;
 
 public class Labyrinth {
 
@@ -119,10 +133,43 @@ public class Labyrinth {
 		return true;
 	}
 	
-	public boolean createLabyrinth(String fileName) {
+	public static boolean createLabyrinth(String fileName) throws IOException {
 		
+		FileWriter fileWriter;
 		
+		try {
+			fileWriter = new FileWriter(fileName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return false;
+		}
 		
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+		
+		bufferedWriter.write("#Labyrinth size (space separated)");
+		
+		int rows = (int) Math.round(Math.random() * 5 + 5);
+		int cols = (int) Math.round(Math.random() * 5 + 5);
+		
+		bufferedWriter.write(rows + " " + cols + "\n\n#Labyrinth cells (tab separated)");
+		
+		for (int i = 0; i < rows; i++) {
+			
+			String currentLine = "";
+			
+			for (int j = 0; j < cols; j++) {
+				
+				currentLine += (int) Math.round(Math.random() * 8) + " ";
+				
+			}
+			
+			bufferedWriter.write(currentLine);
+			currentLine = "";
+			
+		}
+		
+		bufferedWriter.close();
+		return true;
 	}
 	
 	
