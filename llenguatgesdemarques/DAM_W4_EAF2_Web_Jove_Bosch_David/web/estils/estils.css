@@ -1,0 +1,327 @@
+:root{
+    --a : rgba(255, 255, 255, 1);
+}
+
+body{
+    margin: 0px;
+    background-image: url(../imatges/bg.jpg);
+    background-size: 100%;
+}
+
+header{
+    position: fixed;
+    background-color: var(--a);
+
+    z-index: 10;
+
+    backdrop-filter: blur(7px);
+    width: 100%;
+    height: 90px;
+    box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.2);
+}
+
+footer{
+    margin: 0px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+table{
+    padding-top: 0px;
+    font-family: monospace;
+    font-size: 17px;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.bordes{
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.mates{
+    background-color: rgba(40, 255, 93, 0.295)
+}
+
+.electronica{
+    background-color: rgba(228, 255, 74, 0.342);
+}
+
+.disseny{
+    background-color: rgba(235, 112, 174, 0.308);
+}
+
+.robotica{
+    background-color: rgba(130, 236, 255, 0.3);
+}
+
+.programacio{
+    background-color: rgba(255, 176, 130, 0.3);
+}
+
+tr{
+
+    height: 45px;
+
+}
+
+th{
+
+    height: 45px;
+
+}
+
+td{
+
+    height: 45px;
+
+}
+
+.blochorari{
+
+    padding-left: 5%;
+    padding-top: 12%;
+    width: 90%;
+    height: 50%;
+
+}
+
+.titol{
+    float: left;
+    width: 60%;
+    padding-top: 13px;
+    padding-left: 60px;
+    text-anchor: middle;
+    font-size: 50px;
+    font-family: monospace;
+}
+
+.botoensi{
+    font-family: monospace;
+    font-size: 25px;
+    margin-top: 18px;
+    height: 60%;
+    width: 60%;
+    background-color: rgb(228, 228, 228);
+}
+
+.bototitol{
+    float: right;
+    height: 100%;
+    width: 20%;
+
+}
+
+.peu{
+    font-family: monospace;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 20px;   
+}
+
+#sectionTop{
+
+    width: 100%;
+    height: 300px;
+
+}
+#sectionBottom{
+
+    width: 100%;
+    height: 300px;
+
+}
+#sectionA{
+
+    padding: 20px;
+
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+
+    float: left;
+    margin-left: 4%;
+    margin-top: 1%;
+    width: 42%;
+    height: 92%;
+    
+}
+
+.titolSeccio{
+    margin-top: 4px;
+    font-family: monospace;
+    font-size: 25px;    
+    text-align: center;
+    width: 100%;
+    height: 40px;
+
+}
+
+#imatge-inscriute{
+    background-image: url(../imatges/inscripcioimatge.jpg);
+    background-size: 80%;
+    background-repeat: no-repeat;
+
+    margin-left: 10%;
+    width: 100%;
+    height: 190px;
+}
+
+#profes{
+
+    text-align: left;
+    list-style: circle;
+
+}
+
+#botoinscriutecaixa{
+    margin-top: 5px;
+    margin-left: 33%;
+}
+
+#botoacademiacaixa{
+    margin-top: 5px;
+}
+
+#botomaterialcaixa{
+    height: 230px;
+    background-color: aqua;
+    margin-top: 5px;
+}
+
+.botomaterial{
+    width: 100%;
+    height: 100%;
+    font-family: monospace;
+    font-size: 20px;
+    background-color: rgb(228, 228, 228);
+}
+
+.botoinscriute{
+    font-family: monospace;
+    font-size: 20px;
+    background-color: rgb(228, 228, 228);
+}
+
+.botoacademia{
+    font-family: monospace;
+    font-size: 20px;
+    background-color: rgb(228, 228, 228);
+}
+
+.textAcademia{
+    font-family: monospace;
+    font-size: 20px;
+}
+
+#sectionB{
+    padding: 20px;
+
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+
+    float: right;
+    margin-right: 4%;
+    margin-top: 1%;
+    width: 42%;
+    height: 92%;
+    
+}
+
+form{
+
+    text-align: center;
+    font-family: monospace;
+    font-size: 17px;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+
+}
+
+#sectionC{
+
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+
+    font-family: monospace;
+    font-size: 19px;    
+    text-align: justify;
+    float: left;
+    margin-left: 4%;
+    margin-top: 1%;
+    width: 42%;
+    height: 92%;
+    
+}
+
+.textAcademia{
+
+    padding: 20px;
+
+    font-family: monospace;
+    font-size: 19px;    
+    text-align: justify;
+
+}
+
+#sectionD{
+
+    padding: 20px;
+
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+
+    float: right;
+    margin-right: 4%;
+    margin-top: 1%;
+    width: 42%;
+    height: 92%;
+    
+}
+
+.cos-index{
+    padding-top: 110px;
+    margin: 0px;
+    width: 100%;
+    height: 700px;
+}
+
+.cos-inscripcio{
+    padding-top: 150px;
+    margin: 0px;
+    margin-left: 15%;
+    width: 70%;
+    height: 500px;
+}
+
+.cos-academia{
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.2);
+    
+    padding-top: 130px;
+    margin: 0px;
+    margin-left: 15%;
+    width: 70%;
+    height: 500px;
+}
+
+.cos-horari{
+    margin: 0px;
+    width: 100%;
+    height: 700px;
+
+}
