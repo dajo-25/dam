@@ -31,7 +31,7 @@ public class TeleportationCell extends Cell {
 		for (int i = 0; i < values.length; i++) {
 			values[i] = (int) Math.round(Math.random() * 4);
 		}
-		
+		System.out.println(values[0] + "" + values[1]);
 		return values;
 		
 	}
@@ -39,7 +39,8 @@ public class TeleportationCell extends Cell {
 	@Override
 	public boolean traverse(Player p) {
 
-		traverseMessage = super.toString() + "\nEl jugador està viatjant...";
+		
+		traverseMessage = super.toString() + "\nEl jugador està viatjant...\n";
 		
 		int[] teleportPositions = teleportation();
 		

@@ -21,7 +21,7 @@ public class NormalEnterCell extends Cell {
 	public boolean traverse(Player p) {
 
 		openCell();
-		traverseMessage = super.toString() + "\nAccés al laberint.";
+		traverseMessage = super.toString() + "\nAccés al laberint.\n";
 		
 		return true;
 	}

@@ -33,7 +33,7 @@ public class WellCell extends Cell {
 
 		if (this.opened) {
 			
-			traverseMessage = "\nJa s'havia passat per aquesta cel·la.";
+			traverseMessage = "\nJa s'havia passat per aquesta cel·la.\n";
 			return true;
 			
 		}else {
@@ -43,12 +43,12 @@ public class WellCell extends Cell {
 				p.usePower(PowerUp.JUMPER_BOOTS);
 				jumpOver();
 				openCell();
-				traverseMessage = super.toString() + "\nS'ha pogut saltar per sobre i el jugador pot continuar.";
+				traverseMessage = super.toString() + "\nS'ha pogut saltar per sobre i el jugador pot continuar.\n";
 				
 				return true;
 			}else {
 				
-				traverseMessage = super.toString() + "\nNo s'ha pogut saltar per sobre i el jugador ha caigut i ha quedat atrapat!!!";
+				traverseMessage = super.toString() + "\nNo s'ha pogut saltar per sobre i el jugador ha caigut i ha quedat atrapat!!!\n";
 				
 				return false;
 			}			

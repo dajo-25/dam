@@ -26,7 +26,7 @@ public class PowerUpCell extends Cell {
 		
 		if (this.powerUp == null) {
 			
-			this.powerUp = PowerUp.values()[(int) Math.round(Math.random() * PowerUp.values().length)];
+			this.powerUp = PowerUp.values()[(int) Math.round(Math.random() * (PowerUp.values().length - 1))];
 			return this.powerUp;
 			
 		}else {
@@ -41,13 +41,14 @@ public class PowerUpCell extends Cell {
 
 		if (this.opened) {
 			
-			traverseMessage = "\nJa s'havia passat per aquesta cel·la.";
+			traverseMessage = "\nJa s'havia passat per aquesta cel·la.\n";
 			return true;
 			
 		}else {
 			
 			p.addPowerUp(getPowerUp());
-			traverseMessage = super.toString() + "\nHa concedit al jugador el poder " + powerUp;
+			traverseMessage = super.toString() + "\nHa concedit al jugador el poder " + powerUp + "\n";
+			this.openCell();
 			
 			return true;
 		}

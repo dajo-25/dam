@@ -33,7 +33,7 @@ public class MonsterCell extends Cell {
 
 		if (this.opened) {
 			
-			traverseMessage = "\nJa s'havia passat per aquesta cel·la.";
+			traverseMessage = "\nJa s'havia passat per aquesta cel·la.\n";
 			return true;
 			
 		}else {
@@ -43,12 +43,12 @@ public class MonsterCell extends Cell {
 				p.usePower(PowerUp.FLUTE);
 				tameBeast();
 				openCell();
-				traverseMessage = super.toString() + "\nS'ha amansat la fera i el jugador pot continuar de puntetes.";
+				traverseMessage = super.toString() + "\nS'ha amansat la fera i el jugador pot continuar de puntetes.\n";
 				
 				return true;
 			}else {
 				
-				traverseMessage = super.toString() + "\nNo s'ha amansat la fera i el jugador és el sopar del monstre!!!";
+				traverseMessage = super.toString() + "\nNo s'ha amansat la fera i el jugador és el sopar del monstre!!!\n";
 				
 				return false;
 			}			

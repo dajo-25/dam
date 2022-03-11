@@ -1,0 +1,10 @@
+#Labyrinth size (space separated)
+6 5
+
+#Labyrinth cells (tab separated)
+4 7 3 5 4 
+6 4 2 7 5 
+0 6 6 5 3 
+4 8 6 5 7 
+3 7 4 5 2 
+5 6 4 8 8 

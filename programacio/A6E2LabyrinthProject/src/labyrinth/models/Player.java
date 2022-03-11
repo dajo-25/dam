@@ -1,11 +1,10 @@
 package labyrinth.models;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import labyrinth.tools.PowerUp;
 
 public class Player {
+	
+	private final boolean GOD_MODE = true;
 	
 	private String name;
 	private int row, col, labyrinthRows, labyrinthCols;
@@ -16,6 +15,7 @@ public class Player {
 	 * 2 - Boots
 	 * 3 - Flute
 	 */
+	
 	
 	public Player() {
 		
@@ -41,6 +41,7 @@ public class Player {
 		
 	}
 	
+
 	public String getName() {
 		
 		return name;
@@ -75,7 +76,7 @@ public class Player {
 
 			case 'D':
 				
-				if (this.row < labyrinthRows) {
+				if (this.row < labyrinthRows - 1) {
 					
 					this.row++;
 					
@@ -86,7 +87,7 @@ public class Player {
 				break;
 				
 			case 'R':
-				if (this.col < labyrinthCols) {
+				if (this.col < labyrinthCols - 1) {
 					
 					this.col++;
 					
@@ -117,6 +118,7 @@ public class Player {
 		
 	}
 	
+	
 	public void setStartingCell(int row, int col) {
 		
 		if (this.col == -1 && this.row == -1) {
@@ -128,8 +130,19 @@ public class Player {
 		
 	}
 	
-	public void teleport(int row, int col) {
+	public void teleport(int stepsHor, int stepsVer) {
 		
+		for (int i = 0; i < stepsHor; i++) {
+			if (this.col + 1 < labyrinthCols) {
+				this.col++;
+			}
+		}
+		for (int i = 0; i < stepsVer; i++) {
+			if (this.row + 1 < labyrinthRows) {
+				this.row++;
+			}
+		}
+		/*
 		int stepCount = 0;
 		while (stepCount < row && this.row < labyrinthRows) {
 			
@@ -142,7 +155,7 @@ public class Player {
 		while (stepCount < col && this.col < labyrinthCols) {
 			this.col++;
 		}
-		
+		*/
 	}
 	
 	public void setLabyrinthSize(int labyrinthRows, int labyrinthCols) {
@@ -190,10 +203,20 @@ public class Player {
 	
 	public void initializeInitPower() {
 		
-		for (int i = 0; i < 3; i++) {
-			addPowerUp();
+		if (GOD_MODE) {
+			
+			for (int i = 0; i < 100; i++) {
+				addPowerUp();
+			}
+			
+		}else {
+			
+			for (int i = 0; i < 3; i++) {
+				addPowerUp();
+			}
+			
 		}
-		
+
 	}
 	
 	

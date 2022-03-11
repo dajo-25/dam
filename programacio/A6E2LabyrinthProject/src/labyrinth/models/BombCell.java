@@ -33,7 +33,7 @@ public class BombCell extends Cell {
 
 		if (this.opened) {
 			
-			traverseMessage = "\nJa s'havia passat per aquesta cel·la.";
+			traverseMessage = "\nJa s'havia passat per aquesta cel·la.\n";
 			return true;
 			
 		}else {
@@ -43,12 +43,12 @@ public class BombCell extends Cell {
 				p.usePower(PowerUp.WATER_BALLON);
 				disableBomb();
 				openCell();
-				traverseMessage = super.toString() + "\nS'ha desactivat i el jugador s'ha salvat.";
+				traverseMessage = super.toString() + "\nS'ha desactivat i el jugador s'ha salvat.\n";
 				
 				return true;
 			}else {
 				
-				traverseMessage = super.toString() + "\nBADABUUUMMM!!!";
+				traverseMessage = super.toString() + "\nBADABUUUMMM!!!\n";
 				
 				return false;
 			}			

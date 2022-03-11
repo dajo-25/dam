@@ -19,6 +19,7 @@ import labyrinth.models.TeleportationCell;
 import labyrinth.models.TrapCell;
 import labyrinth.models.WellCell;
 import labyrinth.tools.CellType;
+import labyrinth.tools.PowerUp;
 
 public class Labyrinth {
 
@@ -44,11 +45,9 @@ public class Labyrinth {
 	public boolean loadLabyrinth(String fileName) throws IOException {
 		
 		FileReader fileReader;
-		try {
-			fileReader = new FileReader(fileName);
-		} catch (FileNotFoundException e) {
-			return false;
-		}
+		
+		fileReader = new FileReader("games/" +fileName + ".txt");
+		
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 		
 		bufferedReader.readLine();
@@ -136,30 +135,25 @@ public class Labyrinth {
 		return true;
 	}
 	
-	public static boolean createLabyrinth(String fileName) throws IOException {
+	public static boolean createLabyrinth(String fileName, int xSize, int ySize) throws IOException {
 		
 		FileWriter fileWriter;
 		
-		try {
-			fileWriter = new FileWriter(fileName);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			return false;
-		}
+		fileWriter = new FileWriter("games/" + fileName + ".txt");
 		
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 		
 		bufferedWriter.write("#Labyrinth size (space separated)\n");
 		
-		int rows = (int) Math.round(Math.random() * 5 + 5);
-		int cols = (int) Math.round(Math.random() * 5 + 5);
+		int rows = ySize;
+		int cols = xSize;
 		
 		bufferedWriter.write(rows + " " + cols + "\n\n#Labyrinth cells (tab separated)\n");
 		
 		int enterCol = 0;
 		int enterRow = (int) Math.round(Math.random() * rows);
-		int exitCol = cols;
-		int exitRow = (int) Math.round(Math.random() * rows);
+		int exitCol = cols - 1;
+		int exitRow = (int) Math.round(Math.random() * rows) - 1;
 		
 		for (int i = 0; i < rows; i++) {
 			
@@ -167,11 +161,11 @@ public class Labyrinth {
 			
 			for (int j = 0; j < cols; j++) {
 								 
-				if (j == 0 && i == enterRow) {
+				if (j == enterCol && i == enterRow) {
 					
 					currentLine += 0 + " ";
 					
-				}else if (j == cols-1 && i == exitRow) {
+				}else if (j == exitCol && i == exitRow) {
 					
 					currentLine += 1 + " ";
 					
@@ -196,7 +190,6 @@ public class Labyrinth {
 	public boolean startGame(String playerName) {
 		
 		if (labyrinth != null) {
-			
 			gameEnded = false;
 			player = new Player(playerName, iniCellCol, iniCellRow, ncols, nrows);
 			return true;
@@ -249,12 +242,12 @@ public class Labyrinth {
 			output = true;
 		}else {
 			
+			gameEnded = true;
 			output = false;
 			
 		}
 		
 		if (labyrinth[this.player.getRow()][this.player.getCol()].getType() == CellType.NORMAL_EXIT) {
-			
 			output = true;
 			gameEnded = true;
 			
@@ -277,7 +270,7 @@ public class Labyrinth {
 	@Override
 	public String toString() {
 		
-		String output = "";
+		String output = "\n";
 		
 		output += labyrinth[this.player.getRow()][this.player.getCol()].getTraverseMsg();
 		
@@ -289,6 +282,7 @@ public class Labyrinth {
 		}
 		
 		output += "\n";
+		
 		for (int i = 0; i < nrows; i++) {
 			output += "|";
 			for (int j = 0; j < ncols; j++) {
@@ -297,11 +291,18 @@ public class Labyrinth {
 					output += "|    O    ";
 				}else if (labyrinth[i][j].getType() == CellType.NORMAL_EXIT) {
 					output += "|    ~    ";
-				}else{
+				}else if (labyrinth[i][j].getType() == CellType.TELEPORTATION) {
+					if (labyrinth[i][j].isOpened()) {
+						output += "|    ·    ";
+					}else{
+						output += "|    #    ";
+					}
+				}else {
 					
 					if (labyrinth[i][j].isOpened()) {
 						output += "|         ";
 					}else{
+						//output += "|    " + labyrinth[i][j].getType().ordinal() + "    ";
 						output += "|    #    ";
 					}
 				}
@@ -318,6 +319,15 @@ public class Labyrinth {
 			
 		}
 		
+		output += "\n\nEstat del jugador " + player.getName() + ":" 
+				+ "\n   PowerUp " + PowerUp.values()[0] + ": " + player.getPowerUpQuantity(PowerUp.values()[0])
+				+ "\n   PowerUp " + PowerUp.values()[1] + ": " + player.getPowerUpQuantity(PowerUp.values()[1])
+				+ "\n   PowerUp " + PowerUp.values()[2] + ": " + player.getPowerUpQuantity(PowerUp.values()[2])
+				+ "\n   PowerUp " + PowerUp.values()[3] + ": " + player.getPowerUpQuantity(PowerUp.values()[3]);
+		
+		if (!gameEnded) {
+			output += "\n\nMoviment (U, D, L, R):";
+		}
 		
 		
 		return output;

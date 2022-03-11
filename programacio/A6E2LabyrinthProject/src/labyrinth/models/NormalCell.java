@@ -21,7 +21,7 @@ public class NormalCell extends Cell {
 	public boolean traverse(Player p) {
 
 		openCell();
-		traverseMessage = super.toString() + "\nNo afecta al jugador.";
+		traverseMessage = super.toString() + "\nNo afecta al jugador.\n";
 		
 		return true;
 	}

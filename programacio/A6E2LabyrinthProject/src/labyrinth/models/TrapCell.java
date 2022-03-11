@@ -33,7 +33,7 @@ public class TrapCell extends Cell {
 
 		if (this.opened) {
 			
-			traverseMessage = "\nJa s'havia passat per aquesta cel·la.";
+			traverseMessage = "\nJa s'havia passat per aquesta cel·la.\n";
 			return true;
 			
 		}else {
@@ -43,12 +43,12 @@ public class TrapCell extends Cell {
 				p.usePower(PowerUp.KNIFE);
 				cutRope();
 				openCell();
-				traverseMessage = super.toString() + "\nS'ha pogut tallar la corda i el jugador pot escapar";
+				traverseMessage = super.toString() + "\nS'ha pogut tallar la corda i el jugador pot escapar\n";
 				
 				return true;
 			}else {
 				
-				traverseMessage = super.toString() + "\nNo s'ha pogut tallar la corda i el jugador queda penjat cap per avall!!!";
+				traverseMessage = super.toString() + "\nNo s'ha pogut tallar la corda i el jugador queda penjat cap per avall!!!\n";
 				
 				return false;
 			}			
