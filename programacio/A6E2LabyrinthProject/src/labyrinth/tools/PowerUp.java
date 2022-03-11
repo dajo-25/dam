@@ -8,5 +8,6 @@ public enum PowerUp {
     WATER_BALLON,
     KNIFE,
     JUMPER_BOOTS,
-    FLUTE
+    FLUTE,
+    LIVES
 }

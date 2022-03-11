@@ -4,18 +4,19 @@ import labyrinth.tools.PowerUp;
 
 public class Player {
 	
-	private final boolean GOD_MODE = true;
+	private final boolean GOD_MODE = false;
+	private final int STARTING_LIVES = 3;
 	
 	private String name;
 	private int row, col, labyrinthRows, labyrinthCols;
-	private int[] powersUps = new int[4];
+	private int[] powersUps = new int[PowerUp.values().length];
 	/*
 	 * 0 - Water Ballon
 	 * 1 - Knife
 	 * 2 - Boots
 	 * 3 - Flute
+	 * 4 - Lives
 	 */
-	
 	
 	public Player() {
 		
@@ -24,10 +25,17 @@ public class Player {
 		this.row = -1;
 		this.labyrinthCols = 0;
 		this.labyrinthRows = 0;
-		this.powersUps = new int[] {0, 0, 0, 0};
+		
+		for (int i = 0; i < powersUps.length; i++) {
+			
+			this.powersUps[i] = 0;
+			
+		}
+		
 		initializeInitPower();
 		
 	}
+	
 	
 	public Player(String name, int col, int row, int labyrinthCols, int labyrinthRows) {
 		
@@ -36,12 +44,26 @@ public class Player {
 		this.row = row;
 		this.labyrinthCols = labyrinthCols;
 		this.labyrinthRows = labyrinthRows;
-		this.powersUps = new int[] {0, 0, 0, 0};
+
+		this.powersUps[4] = STARTING_LIVES;
+		
+		for (int i = 0; i < powersUps.length - 1; i++) {
+			
+			this.powersUps[i] = 0;
+			
+		}
+		
 		initializeInitPower();
 		
-	}
+		if (this.powersUps[4] != STARTING_LIVES) {
+			
+			this.powersUps[(int) Math.round(Math.random() * ((PowerUp.values().length) - 2))] += (this.powersUps[4] - STARTING_LIVES);
+			this.powersUps[4] = STARTING_LIVES;
+			
+		}
+		
+	}	
 	
-
 	public String getName() {
 		
 		return name;
@@ -55,7 +77,7 @@ public class Player {
 	public int getCol() {
 		
 		return col;
-	}
+	}	
 	
 	public boolean move (char mov) {
 		
@@ -116,8 +138,7 @@ public class Player {
 			return false;
 		}
 		
-	}
-	
+	}		
 	
 	public void setStartingCell(int row, int col) {
 		
@@ -130,6 +151,7 @@ public class Player {
 		
 	}
 	
+
 	public void teleport(int stepsHor, int stepsVer) {
 		
 		for (int i = 0; i < stepsHor; i++) {
@@ -191,7 +213,8 @@ public class Player {
 	
 	public void addPowerUp() {
 		
-		this.powersUps[(int) Math.round(Math.random() * (PowerUp.values().length-1))]++;
+		int newPowerUpOrdinal = (int) Math.round(Math.random() * ((PowerUp.values().length) - 1));
+		this.powersUps[newPowerUpOrdinal]++;
 		
 	}
 	
@@ -205,7 +228,7 @@ public class Player {
 		
 		if (GOD_MODE) {
 			
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < 1000; i++) {
 				addPowerUp();
 			}
 			

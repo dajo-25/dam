@@ -320,6 +320,7 @@ public class Labyrinth {
 		}
 		
 		output += "\n\nEstat del jugador " + player.getName() + ":" 
+				+ "\n   VIDES: " + player.getPowerUpQuantity(PowerUp.values()[4])
 				+ "\n   PowerUp " + PowerUp.values()[0] + ": " + player.getPowerUpQuantity(PowerUp.values()[0])
 				+ "\n   PowerUp " + PowerUp.values()[1] + ": " + player.getPowerUpQuantity(PowerUp.values()[1])
 				+ "\n   PowerUp " + PowerUp.values()[2] + ": " + player.getPowerUpQuantity(PowerUp.values()[2])
