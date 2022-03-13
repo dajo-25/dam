@@ -46,6 +46,14 @@ public class BombCell extends Cell {
 				traverseMessage = super.toString() + "\nS'ha desactivat i el jugador s'ha salvat.\n";
 				
 				return true;
+			}else if (p.getPowerUpQuantity(PowerUp.LIVES) > 0) {
+				
+				p.usePower(PowerUp.LIVES);
+				disableBomb();
+				openCell();
+				traverseMessage = super.toString() + "\nHas perdut una vida!.\n";
+				
+				return true;
 			}else {
 				
 				traverseMessage = super.toString() + "\nBADABUUUMMM!!!\n";

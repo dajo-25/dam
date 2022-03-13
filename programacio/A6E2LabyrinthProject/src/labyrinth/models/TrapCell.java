@@ -46,6 +46,14 @@ public class TrapCell extends Cell {
 				traverseMessage = super.toString() + "\nS'ha pogut tallar la corda i el jugador pot escapar\n";
 				
 				return true;
+			}else if (p.getPowerUpQuantity(PowerUp.LIVES) > 0) {
+				
+				p.usePower(PowerUp.LIVES);
+				cutRope();
+				openCell();
+				traverseMessage = super.toString() + "\nHas perdut una vida!.\n";
+				
+				return true;
 			}else {
 				
 				traverseMessage = super.toString() + "\nNo s'ha pogut tallar la corda i el jugador queda penjat cap per avall!!!\n";

@@ -10,6 +10,9 @@ public class Player {
 	private String name;
 	private int row, col, labyrinthRows, labyrinthCols;
 	private int[] powersUps = new int[PowerUp.values().length];
+	private int startingCellCol, startingCellRow;
+	private boolean justInjured;
+	
 	/*
 	 * 0 - Water Ballon
 	 * 1 - Knife
@@ -42,8 +45,11 @@ public class Player {
 		this.name = name;
 		this.col = col;
 		this.row = row;
+		this.startingCellCol = col;
+		this.startingCellRow = row;
 		this.labyrinthCols = labyrinthCols;
 		this.labyrinthRows = labyrinthRows;
+		this.justInjured = false;
 
 		this.powersUps[4] = STARTING_LIVES;
 		
@@ -64,6 +70,18 @@ public class Player {
 		
 	}	
 	
+
+
+	public boolean isJustInjured() {
+		return justInjured;
+	}
+
+
+	public void setJustInjured(boolean justInjured) {
+		this.justInjured = justInjured;
+	}
+
+
 	public String getName() {
 		
 		return name;
@@ -77,7 +95,7 @@ public class Player {
 	public int getCol() {
 		
 		return col;
-	}	
+	}
 	
 	public boolean move (char mov) {
 		
@@ -85,6 +103,18 @@ public class Player {
 			
 			switch (mov) {
 			case 'U':
+				
+				if (this.row > 0) {
+					
+					this.row--;
+					
+				}else {
+					return false;
+				}
+				
+				break;
+				
+			case 'u':
 				
 				if (this.row > 0) {
 					
@@ -108,6 +138,17 @@ public class Player {
 				
 				break;
 				
+			case 'd':
+				
+				if (this.row < labyrinthRows - 1) {
+					
+					this.row++;
+					
+				}else {
+					return false;
+				}
+				
+				break;
 			case 'R':
 				if (this.col < labyrinthCols - 1) {
 					
@@ -118,7 +159,25 @@ public class Player {
 				}
 				break;
 				
+			case 'r':
+				if (this.col < labyrinthCols - 1) {
+					
+					this.col++;
+					
+				}else {
+					return false;
+				}
+				break;
+				
 			case 'L':
+				if (this.col > 0) {
+					this.col--;
+				}else {
+					return false;
+				}
+				break;
+				
+			case 'l':
 				if (this.col > 0) {
 					this.col--;
 				}else {
@@ -152,6 +211,14 @@ public class Player {
 	}
 	
 
+	
+	public void returnStartingCell() {
+		
+		this.col = startingCellCol;
+		this.row = startingCellRow;
+		
+	}
+	
 	public void teleport(int stepsHor, int stepsVer) {
 		
 		for (int i = 0; i < stepsHor; i++) {

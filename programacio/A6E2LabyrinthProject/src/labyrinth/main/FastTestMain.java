@@ -6,7 +6,7 @@ import java.util.Scanner;
 import labyrinth.controller.Labyrinth;
 import labyrinth.tools.CellType;
 
-public class OtherDebuggingMain {
+public class FastTestMain {
 
 	public static void main(String[] args) {
 		
@@ -64,7 +64,7 @@ public class OtherDebuggingMain {
 					
 					char mov = scan.nextLine().charAt(0);
 					
-					while (mov != 'U' && mov != 'D' && mov != 'R' && mov != 'L') {
+					while (mov != 'U' && mov != 'D' && mov != 'R' && mov != 'L' && mov != 'u' && mov != 'd' && mov != 'r' && mov != 'l') {
 						
 						System.out.println("Moviment invàlid, intenti-ho de nou!");
 						mov = scan.nextLine().charAt(0);

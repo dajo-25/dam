@@ -42,6 +42,12 @@ public class Labyrinth {
 		
 	}
 	
+	
+	
+	public Player getPlayer() {
+		return player;
+	}
+
 	public boolean loadLabyrinth(String fileName) throws IOException {
 		
 		FileReader fileReader;
@@ -237,7 +243,6 @@ public class Labyrinth {
 		boolean output = false;
 		
 		if(labyrinth[this.player.getRow()][this.player.getCol()].traverse(player)) {
-			
 			
 			output = true;
 		}else {
