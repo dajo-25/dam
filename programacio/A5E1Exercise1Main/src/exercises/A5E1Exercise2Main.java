@@ -1,9 +1,14 @@
 package exercises;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class A5E1Exercise2Main {
@@ -71,9 +76,75 @@ public class A5E1Exercise2Main {
 				
 				File sortingFile = new File(scan.nextLine());
 				
-				if (sortingFile.exists()) {
+				System.out.println("En quin arxiu ho vol guardar?");
+				
+				File outputFile = new File(scan.nextLine());
+				
+				
+				if (sortingFile.exists() && !sortingFile.isDirectory()) {
 					
+					FileReader fileReader = null;
 					
+					try {
+						fileReader = new FileReader(sortingFile);
+					} catch (FileNotFoundException e) {
+						System.out.println("No s'ha trobat el fitxer");
+					}
+					
+					BufferedReader bufferedReader = new BufferedReader(fileReader);
+					
+					try {
+						
+						ArrayList<Integer> values = new ArrayList<>();
+						
+						String currentLine = bufferedReader.readLine();
+						
+						while (currentLine != null) {
+							values.add(Integer.parseInt(currentLine));
+							currentLine = bufferedReader.readLine();
+						}
+						
+						values.sort(null);
+						
+						FileWriter fileWriter = new FileWriter(outputFile);
+						BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+						
+						try {
+							
+							if (!outputFile.exists()) {
+								
+								if(!A5E1Exercise2Main.foldersReady(outputFile)) {
+									A5E1Exercise2Main.createFolders(outputFile);
+								}
+								
+								outputFile.createNewFile();
+								
+								Iterator<Integer> it = values.iterator();
+								
+								while (it.hasNext()) {
+									Integer integer = (Integer) it.next();
+									String num = "" + integer;
+									bufferedWriter.write(num);
+									bufferedWriter.newLine();
+									
+								}
+								
+							}else {
+								System.out.println("El fitxer ja existeix");
+							}
+
+						} catch (IOException e) {
+							System.out.println("No s'ha pogut crear");
+						}
+						
+						System.out.println(values.toString());
+						
+						bufferedWriter.close();
+						fileWriter.close();
+						
+					} catch (IOException e) {
+						
+					}
 					
 				}else {
 					
