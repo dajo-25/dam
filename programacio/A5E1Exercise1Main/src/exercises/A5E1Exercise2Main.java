@@ -106,12 +106,15 @@ public class A5E1Exercise2Main {
 						
 						values.sort(null);
 						
-						FileWriter fileWriter = new FileWriter(outputFile);
-						BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+						FileWriter fileWriter;
+						BufferedWriter bufferedWriter; 
 						
 						try {
 							
 							if (!outputFile.exists()) {
+								
+								fileWriter = new FileWriter(outputFile);
+								bufferedWriter = new BufferedWriter(fileWriter);
 								
 								if(!A5E1Exercise2Main.foldersReady(outputFile)) {
 									A5E1Exercise2Main.createFolders(outputFile);
@@ -129,6 +132,9 @@ public class A5E1Exercise2Main {
 									
 								}
 								
+								bufferedWriter.close();
+								fileWriter.close();
+								
 							}else {
 								System.out.println("El fitxer ja existeix");
 							}
@@ -139,8 +145,7 @@ public class A5E1Exercise2Main {
 						
 						System.out.println(values.toString());
 						
-						bufferedWriter.close();
-						fileWriter.close();
+						
 						
 					} catch (IOException e) {
 						
