@@ -123,6 +123,7 @@ public class Book implements Comparable<Book>{
 		
 	}
 
+	 
 	@Override
 	public int compareTo(Book o) {
 
@@ -152,14 +153,13 @@ public class Book implements Comparable<Book>{
 		}
 		
 	}
-
+	
+	
 	@Override
 	public String toString() {
 		return "Book [title=" + title + ", isbn=" + isbn + ", author=" + author + ", category=" + category
 				+ ", publisher=" + publisher + ", description=" + description + ", imageLink=" + imageLink + ", nPages="
 				+ nPages + "]";
 	}
-	
-	
 	
 }
