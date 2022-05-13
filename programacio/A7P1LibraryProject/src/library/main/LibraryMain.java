@@ -2,9 +2,13 @@ package library.main;
 
 import java.util.Scanner;
 
+import library.controller.LibraryCatalog;
+
 public class LibraryMain {
 
 	public static void main(String[] args) {
+		
+		LibraryCatalog libraryCatalog = new LibraryCatalog();
 		
 		Scanner scan = new Scanner(System.in);
 		int option = -1;
