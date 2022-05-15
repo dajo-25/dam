@@ -104,9 +104,6 @@ public class LibraryCatalog {
 	
 	public boolean addBook(Book currentBook) {
 		
-		if (catalog.get(currentBook.getCategory()).contains(currentBook)) {
-			return false;
-		}
 		
 		if (catalog.containsKey(currentBook.getCategory())) {
 			
@@ -115,7 +112,13 @@ public class LibraryCatalog {
 		}else {
 			
 			catalog.put(currentBook.getCategory(), new TreeSet<Book>());
-			catalog.get(currentBook.getCategory()).add(currentBook);
+			if (catalog.get(currentBook.getCategory()).contains(currentBook)) {
+				return false;
+			}else {
+				catalog.get(currentBook.getCategory()).add(currentBook);
+				
+			}
+			
 			
 		}
 		
@@ -160,10 +163,104 @@ public class LibraryCatalog {
 		return null;
 	}
 	
-	public ArrayList<String> getCathegories(){
+	public TreeSet<String> getCathegories(){
 		
+		if (this.catalog.isEmpty()) {
+			return new TreeSet<>();
+			
+		}else {
+			
+			return new TreeSet<>(this.catalog.keySet());
+			
+		}
 		
+	}
+	
+	public TreeSet<String> getAuthors(){
 		
+		if (this.catalog.isEmpty()) {
+			return new TreeSet<>();
+			
+		}else {
+			
+			TreeSet<String> authors = new TreeSet<>();
+			
+			for (Entry<String, TreeSet<Book>> entries : catalog.entrySet()) {
+				
+				Iterator<Book> it = entries.getValue().iterator();
+				
+				while (it.hasNext()) {
+					Book book = (Book) it.next();
+					
+					authors.add(book.getAuthor());
+					
+				}
+				
+			}
+			
+			return authors;
+		}
+		
+	}
+	
+	public ArrayList<Book> getBooksByCathegory(String cathegory){
+		
+		if (!this.catalog.containsKey(cathegory)) {
+			return new ArrayList<>();
+		}else {
+			
+			return new ArrayList<Book>(catalog.get(cathegory));
+			
+		}
+		
+	}
+	
+	public ArrayList<Book> getBooksByAuthor(String author){
+		
+		ArrayList<Book> booksByAuthor = new ArrayList<>();
+		
+		for (Entry<String, TreeSet<Book>> entries : catalog.entrySet()) {
+			
+			Iterator<Book> it = entries.getValue().iterator();
+			
+			while (it.hasNext()) {
+				Book book = (Book) it.next();
+				
+				if (book.getAuthor().equals(author)) {
+					
+					booksByAuthor.add(book);
+					
+				}
+				
+			}
+			
+		}
+		
+		return booksByAuthor;
+		
+	}
+	
+	@Override
+	public String toString() {
+		
+		String str = "----------------------------------------" + 
+				"\nCATALOG ID: " + this.hashCode() + "\n";
+		
+		for (String cathegory : this.catalog.keySet()) {
+			
+			str += "\n  Cathegory \"" + cathegory + "\"\n";
+			
+			for (Book book : this.catalog.get(cathegory)) {
+				
+				str += "    · " + book.toString();
+				
+			}
+			str += "\n";
+		}
+		
+		str += "\n----------------------------------------";
+		
+		return str;
 	}
 	
 }

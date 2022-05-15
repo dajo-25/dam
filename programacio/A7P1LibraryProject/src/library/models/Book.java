@@ -157,9 +157,8 @@ public class Book implements Comparable<Book>{
 	
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", isbn=" + isbn + ", author=" + author + ", category=" + category
-				+ ", publisher=" + publisher + ", description=" + description + ", imageLink=" + imageLink + ", nPages="
-				+ nPages + "]";
+		return title + " (" + nPages + " pages) ISBN: " + isbn + "| Written by: " + author + " | Cathegory: " + category
+				+ " | Publisher: " + publisher + " | Description: " + description + "| Image link: " + imageLink;
 	}
 	
 }
