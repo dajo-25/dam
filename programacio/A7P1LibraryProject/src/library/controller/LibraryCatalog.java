@@ -249,13 +249,14 @@ public class LibraryCatalog {
 		for (String cathegory : this.catalog.keySet()) {
 			
 			str += "\n  Cathegory \"" + cathegory + "\"\n";
+						
 			
 			for (Book book : this.catalog.get(cathegory)) {
 				
-				str += "    · " + book.toString();
+				str +=  "    · " +book.toString() +"\n";
 				
 			}
-			str += "\n";
+			
 		}
 		
 		str += "\n----------------------------------------";

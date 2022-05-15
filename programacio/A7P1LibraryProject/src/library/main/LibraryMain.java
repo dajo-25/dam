@@ -18,7 +18,7 @@ public class LibraryMain {
 		
 		while (option != 0) {
 			
-			System.out.println("~~~~ MENÚ DE LA BIBLIOTECA ~~~~\r\n"
+			System.out.println("\n~~~~ MENÚ DE LA BIBLIOTECA ~~~~\r\n"
 					+ "0. Sortir\r\n"
 					+ "1. Afegir un nou llibre\r\n"
 					+ "2. Buscar un llibre per ISBN\r\n"
@@ -123,7 +123,7 @@ public class LibraryMain {
 				
 				String cathegoryQuery = scan.nextLine();
 				
-				System.out.println("Els llibres de la categoria " + cathegoryQuery + "són:");
+				System.out.println("Els llibres de la categoria " + cathegoryQuery + " són:");
 				
 				for (Book book : libraryCatalog.getBooksByCathegory(cathegoryQuery)) {
 					
@@ -136,16 +136,39 @@ public class LibraryMain {
 				
 			case 5:
 				
+				System.out.println("Quina autor vol consultar?");
+				
+				for (String string : libraryCatalog.getAuthors()) {
+					
+					System.out.println("  · " + string);
+					
+				}
+				
+				String authorQuery = scan.nextLine();
+				
+				System.out.println("Els llibres de " + authorQuery + " són:");
+				
+				for (Book book : libraryCatalog.getBooksByAuthor(authorQuery)) {
+					
+					System.out.println("  · " + book.toString());
+					
+				}
 				
 				break;
 				
 			case 6:
 				
+				System.out.println(libraryCatalog.toString());
 				
 				break;
 			
 			case 7:
 				
+				System.out.println("On vol guardar el catàleg? (ruta\\nomfitxer.csv)");
+				
+				String path = scan.nextLine();
+				
+				libraryCatalog.catalogToCSV(path);
 				
 				break;
 			default:
