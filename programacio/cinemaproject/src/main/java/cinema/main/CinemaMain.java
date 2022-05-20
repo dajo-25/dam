@@ -49,12 +49,15 @@ public class CinemaMain {
                     break;
                 case 9:
 
-                    CinemaController.resetCinema("a", "a", "a");
+                    CinemaController.resetCinema("theaters.csv", "films.csv"
+                            ,"projections.csv");
 
                     break;
                 default:
                     System.out.println("Opció incorrecta o no implementada");
             }
+
+            System.out.println("\n");
 
         } while(option != 0);
 

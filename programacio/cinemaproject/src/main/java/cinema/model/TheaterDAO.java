@@ -14,13 +14,13 @@ public class TheaterDAO {
     /**
      * Passos per establir connexió amb la BD
      * 1. Definir les dades bàsiques de connexió (URL, USER, PASSWD)
-     * 2. A partir de Driver, obternir la connexió.
+     * 2. A partir de Driver, obtenir la connexió.
      * 3. Definir la instrucció SQL
      * 4. Executar l'SQL
-     * 5. Recollir les dades obtingudes per l'execució SQL (si s'escau (si s'utilitza SELECT))
+     * 5. Recollir les dades aconseguides per l'execució SQL (si s'escau (si s'utilitza SELECT))
      * 6. Tancar tota connexió.
      *
-     * IMPORTANTS EL PAS 2 I 6. ÉS EXTREMADAMENT INEFICIENT, PERÒ S'HA DE FER PER SEGURETAT. QUAN S'OBRA LA
+     * IMPORTANTS EL PAS 2 I 6. ÉS EXTREMADAMENT INEFICIENT, PERÒ S'HA DE FER PER SEGURETAT. QUAN S'OBRE LA
      * CONNEXIÓ S'OBRE UN PORT AL TEU ORDINADOR I UN PORT AL SERVIDOR, PER TANT, S'HA DE TANCAR.
      */
 
@@ -112,7 +112,8 @@ public class TheaterDAO {
 
             sqlSentence = "DELETE FROM theater;";
 
-            nRows = statement.executeUpdate(sqlSentence);
+            statement.executeUpdate(sqlSentence);
+            nRows = statement.getMaxRows();
 
             statement.close();
             bdConnection.close();

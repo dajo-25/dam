@@ -1,5 +1,7 @@
 package cinema.model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -32,6 +34,7 @@ public class FilmDAO {
         try {
             bdconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = bdconnection.createStatement();
+
             sql = "INSERT INTO film (title, description, duration) values('" + film.getTitle() +"', '" +
                     film.getDescription() + "', " + film.getDuration() + ");";
 
@@ -71,7 +74,8 @@ public class FilmDAO {
 
             sqlSentence = "DELETE FROM film;";
 
-            nRows = statement.executeUpdate(sqlSentence);
+            statement.executeUpdate(sqlSentence);
+            nRows = statement.getMaxRows();
 
             statement.close();
             bdConnection.close();
@@ -242,8 +246,46 @@ public class FilmDAO {
 
     }
 
-    public static boolean loadToDBFromFile(String s) {
+    public static boolean loadToDBFromFile(String filePath) {
 
-        return true;
+        try{
+            String currentLine;
+
+            FileReader fileReader = new FileReader(filePath);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            currentLine = bufferedReader.readLine();
+
+            String [] currentData;
+            while (currentLine != null){
+
+                currentData = currentLine.split(";");
+
+                Film currentFilm = new Film();
+                currentFilm.setTitle(currentData[0]);
+                currentFilm.setDescription(currentData[1]);
+                currentFilm.setDuration(Integer.parseInt(currentData[2]));
+
+                /**
+                 * Utilitzo el addFilm(). Cada cop que es crida genera molta ineficiencia per l'obertura
+                 * i tancament dels ports, però per comoditat reaprofito el codi. Si fos necessari, ho reescriuria.
+                 */
+                FilmDAO.addFilm(currentFilm);
+
+                currentLine = bufferedReader.readLine();
+
+            }
+
+            bufferedReader.close();
+            fileReader.close();
+
+            return true;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+
+        }
+
     }
 }

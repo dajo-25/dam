@@ -16,10 +16,10 @@ public class CinemaController {
     public static boolean resetCinema(String theatersFilePath, String filmsFilePath, String projectionsFilePath){
 
         boolean removed = ProjectionDAO.removeProjections() && FilmDAO.removeFilms() && TheaterDAO.removeTheaters();
-        boolean added = TheaterDAO.loadToDBFromFile(BASE_PATH + THEATERS_FILENAME)
-                && FilmDAO.loadToDBFromFile(BASE_PATH + FILMS_FILENAME)
-                && ProjectionDAO.loadToDBFromFile(BASE_PATH + PROJECTIONS_FILENAME);
 
+        boolean added = TheaterDAO.loadToDBFromFile(BASE_PATH + theatersFilePath)
+                && FilmDAO.loadToDBFromFile(BASE_PATH + filmsFilePath)
+                && ProjectionDAO.loadToDBFromFile(BASE_PATH + projectionsFilePath);
 
         return removed && added;
     }
