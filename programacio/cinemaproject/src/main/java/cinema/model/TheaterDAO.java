@@ -1,7 +1,8 @@
 package cinema.model;
 
-import org.checkerframework.checker.units.qual.A;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -155,4 +156,38 @@ public class TheaterDAO {
 
     }
 
+    public static boolean loadToDBFromFile(String filePath) {
+
+        try{
+            String currentLine;
+
+            FileReader fileReader = new FileReader(filePath);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            currentLine = bufferedReader.readLine();
+            System.out.println(currentLine);
+
+            String [] currentData;
+            while (currentLine != null){
+
+                currentData = currentLine.split(";");
+                for (String dataField:
+                     currentData) {
+                    System.out.println(dataField);
+                }
+                currentLine = bufferedReader.readLine();
+            }
+
+            bufferedReader.close();
+            fileReader.close();
+
+            return true;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
 }

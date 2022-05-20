@@ -242,4 +242,8 @@ public class FilmDAO {
 
     }
 
+    public static boolean loadToDBFromFile(String s) {
+
+        return true;
+    }
 }

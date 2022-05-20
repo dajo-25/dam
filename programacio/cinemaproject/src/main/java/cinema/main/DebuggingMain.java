@@ -1,17 +1,26 @@
 package cinema.main;
 
-import java.util.Scanner;
-
+import cinema.controller.CinemaController;
 import cinema.model.Film;
 import cinema.model.FilmDAO;
 import cinema.model.Theater;
 import cinema.model.TheaterDAO;
+
+import java.io.*;
 
 public class DebuggingMain {
 
     public static void main(String[] args) {
 
         //DebuggingMain.test1();
+
+        //DebuggingMain.test2();
+
+        CinemaController.resetCinema("a","a","a");
+
+    }
+
+    private static void test2() {
 
         System.out.println("____________________________________");
 

@@ -1,14 +1,8 @@
 package cinema.main;
 
 import cinema.controller.CinemaController;
-import cinema.model.Film;
-import cinema.model.FilmDAO;
-import cinema.model.Theater;
-import cinema.model.TheaterDAO;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class CinemaMain {
@@ -29,6 +23,7 @@ public class CinemaMain {
             System.out.println("\t6. Afegir una projecció");
             System.out.println("\t7. Afegir una pel·lícula");
             System.out.println("\t8. Modificar la capacitat d'una sala");
+            System.out.println("\t9. Debugging");
             System.out.print("Opció: ");
             option = keyboard.nextInt();
 
@@ -45,6 +40,17 @@ public class CinemaMain {
                 case 4:
                     break;
                 case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+
+                    CinemaController.resetCinema("a", "a", "a");
+
                     break;
                 default:
                     System.out.println("Opció incorrecta o no implementada");
