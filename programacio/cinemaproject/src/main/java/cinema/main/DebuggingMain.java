@@ -6,8 +6,6 @@ import cinema.model.FilmDAO;
 import cinema.model.Theater;
 import cinema.model.TheaterDAO;
 
-import java.io.*;
-
 public class DebuggingMain {
 
     public static void main(String[] args) {
@@ -47,7 +45,7 @@ public class DebuggingMain {
 
         }
 
-        TheaterDAO.udateTheater(new Theater(1, "Doctor Strange", 100));
+        TheaterDAO.updateTheater(new Theater(1, "Doctor Strange", 100));
 
         for (Theater curTheater:
                 TheaterDAO.getTheaters()) {

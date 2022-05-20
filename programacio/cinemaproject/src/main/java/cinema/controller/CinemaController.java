@@ -1,8 +1,6 @@
 package cinema.controller;
 
-import cinema.model.FilmDAO;
-import cinema.model.ProjectionDAO;
-import cinema.model.TheaterDAO;
+import cinema.model.*;
 
 import java.io.File;
 

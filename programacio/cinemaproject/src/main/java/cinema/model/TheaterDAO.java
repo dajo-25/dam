@@ -1,7 +1,6 @@
 package cinema.model;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
@@ -127,7 +126,7 @@ public class TheaterDAO {
 
     }
 
-    public static boolean udateTheater(Theater theater){
+    public static boolean updateTheater(Theater theater){
         //Ha d'actualitzar les dades de la sala (nom i capacitat);
         Connection bdConnection;
         Statement statement;
@@ -165,17 +164,25 @@ public class TheaterDAO {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             currentLine = bufferedReader.readLine();
-            System.out.println(currentLine);
 
             String [] currentData;
             while (currentLine != null){
 
-                currentData = currentLine.split(";");
-                for (String dataField:
-                     currentData) {
-                    System.out.println(dataField);
-                }
+                currentData = currentLine.split(",");
+
+                Theater currentTheater = new Theater();
+                currentTheater.setNumber(Integer.parseInt(currentData[0]));
+                currentTheater.setName(currentData[1]);
+                currentTheater.setCapacity(Integer.parseInt(currentData[2]));
+
+                /**
+                 * Utilitzo el addTheater(). Cada cop que es crida genera molta ineficiencia per l'obertura
+                 * i tancament dels ports, però per comoditat reaprofito el codi. Si fos necessari, ho reescriuria.
+                 */
+                TheaterDAO.addTheater(currentTheater);
+
                 currentLine = bufferedReader.readLine();
+
             }
 
             bufferedReader.close();
