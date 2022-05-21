@@ -198,4 +198,17 @@ public class TheaterDAO {
         }
 
     }
+
+    public static String theatersToString() {
+
+        String output = "Aquestes són les sales:\n";
+
+        for (Theater currentTheater :
+                TheaterDAO.getTheaters()) {
+            output += "Sala \"" + currentTheater.getName() + "\" (número " + currentTheater.getNumber()
+                    + ") | Capacitat per a " + currentTheater.getCapacity() + " persones.\n";
+        }
+
+        return output;
+    }
 }

@@ -1,11 +1,11 @@
 package cinema.model;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class ProjectionDAO {
 
@@ -26,6 +26,41 @@ public class ProjectionDAO {
      * CONNEXIÓ S'OBRE UN PORT AL TEU ORDINADOR I UN PORT AL SERVIDOR, PER TANT, S'HA DE TANCAR.
      */
 
+
+    public static boolean addProjection(String title, int theaterNum, String time){
+
+        Connection bdconnection = null;
+        Statement statement = null;
+        String sql;
+        int nRows = 0;
+
+        try {
+            bdconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = bdconnection.createStatement();
+
+            sql = "INSERT INTO projection VALUES(" + theaterNum
+                    + ", (SELECT id FROM film WHERE title LIKE('"  + title + "'))"
+                    + ", '" + time +"');";
+
+            /**
+             * executeQuery() per als SELECT
+             * executeUpdate() per als UPDATE, DELETE, INSERT
+             *
+             */
+
+            nRows = statement.executeUpdate(sql);
+
+            statement.close();
+            bdconnection.close();
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return nRows == 1;
+
+    }
 
     public static boolean loadToDBFromFile(String filePath) {
 
@@ -109,6 +144,41 @@ public class ProjectionDAO {
         return nRows == 0;
 
 
+
+    }
+
+
+    public static String projectionsFromTheaterToString(int givenTheaterNum) {
+
+        String output = "Les projeccions programades per a la sala \"";
+
+        try{
+
+            Connection dbConnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            Statement statement = dbConnection.createStatement();
+            String sql = "SELECT F.title, P.hour, T.name FROM projection P INNER JOIN theater T "
+                    + "ON P.id_theater = T.number INNER JOIN film F ON P.id_film = F.id WHERE T.number = "
+                    + givenTheaterNum + ";";
+
+            output += statement.executeQuery("SELECT name FROM theater WHERE number =" + givenTheaterNum + ";")
+                    .getString(0) + "\" són:\n";
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()){
+
+                output += resultSet.getString("title") + " | A les "
+                        + resultSet.getString("hour") + "\n";
+
+            }
+
+            statement.close();
+            dbConnection.close();
+
+            return output;
+        }catch (Exception e){
+            return "S'ha produït un error";
+        }
 
     }
 }

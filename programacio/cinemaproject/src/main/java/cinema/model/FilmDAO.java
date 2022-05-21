@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class FilmDAO {
 
@@ -286,6 +287,114 @@ public class FilmDAO {
             return false;
 
         }
+
+    }
+
+    public static String filmsToString() {
+
+        String output = "Aquestes són les películes:\n";
+
+        for (Film currentFilm :
+                FilmDAO.getFilms()) {
+            output += currentFilm.getTitle().toUpperCase(Locale.ROOT) + " | Duració: " + currentFilm.getDuration()
+                    + " minuts | Argument: " + currentFilm.getDescription() + "\n";
+        }
+
+        return output;
+
+    }
+
+    public static String filmsToString(ArrayList<Film> films) {
+
+        String output = "Aquestes són les películes:\n";
+
+        for (Film currentFilm :
+                films) {
+            output += currentFilm.getTitle().toUpperCase(Locale.ROOT) + " | Duració: " + currentFilm.getDuration()
+                    + " minuts | Argument: " + currentFilm.getDescription() + "\n";
+        }
+
+        return output;
+
+    }
+
+    public static ArrayList<Film> filmsStartingAt(String givenTime) {
+
+        ArrayList<Film> films = new ArrayList<>();
+
+        Connection bdConnection;
+        Statement statement;
+        ResultSet result;
+        String sqlSentence;
+
+        try{
+
+            bdConnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = bdConnection.createStatement();
+
+            sqlSentence = "SELECT * FROM film F, projection P WHERE F.id = P.id_film AND P.hour LIKE '"
+                + givenTime + "';";
+
+            result = statement.executeQuery(sqlSentence);
+
+            while (result.next()){
+
+                Film film = new Film();
+                film.setTitle(result.getString("title"));
+                film.setDescription(result.getString("description"));
+                film.setDuration(result.getInt("duration"));
+
+                films.add(film);
+
+            }
+
+            statement.close();
+            bdConnection.close();
+
+        }catch (SQLException exception){
+            return null;
+        }
+
+        return films;
+    }
+
+    public static ArrayList<Film> filmsShorterThan(int givenLength) {
+
+        ArrayList<Film> films = new ArrayList<>();
+
+        Connection bdConnection;
+        Statement statement;
+        ResultSet result;
+        String sqlSentence;
+
+        try{
+
+            bdConnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            statement = bdConnection.createStatement();
+
+            sqlSentence = "SELECT * FROM film WHERE duration < " + givenLength + ";";
+
+            result = statement.executeQuery(sqlSentence);
+
+            while (result.next()){
+
+                Film film = new Film();
+                film.setTitle(result.getString("title"));
+                film.setDescription(result.getString("description"));
+                film.setDuration(result.getInt("duration"));
+
+                films.add(film);
+
+            }
+
+            statement.close();
+            bdConnection.close();
+
+        }catch (SQLException exception){
+            return null;
+        }
+
+        return films;
 
     }
 }

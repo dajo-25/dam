@@ -3,6 +3,10 @@ package cinema.controller;
 import cinema.model.*;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class CinemaController {
 
@@ -24,4 +28,62 @@ public class CinemaController {
         return removed && added;
     }
 
+    public static boolean addProjection(String givenTitle, int givenTheaterNum, String givenTime) {
+
+        if(ProjectionDAO.addProjection(givenTitle, givenTheaterNum, givenTime)){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
+    public static boolean addFilm(Film givenFilm) {
+
+        if (FilmDAO.addFilm(givenFilm)){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public static boolean updateTheater(Theater modTheater) {
+
+        if (TheaterDAO.updateTheater(modTheater)){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public static String theatersToString(){
+
+        return TheaterDAO.theatersToString();
+    }
+
+    public static String filmsToString(){
+
+        return FilmDAO.filmsToString();
+    }
+
+    public static String filmsToString(ArrayList<Film> films){
+
+        return FilmDAO.filmsToString(films);
+    }
+
+    public static ArrayList<Film> filmsStartingAt(String givenTime) {
+
+        return FilmDAO.filmsStartingAt(givenTime);
+    }
+
+    public static ArrayList<Film> filmsShorterThan(int givenLength) {
+        return FilmDAO.filmsShorterThan(givenLength);
+    }
+
+    public static String projectionsFromTheater(int givenTheaterNum) {
+
+        return  ProjectionDAO.projectionsFromTheaterToString(givenTheaterNum);
+    }
 }

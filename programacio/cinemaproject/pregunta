@@ -1,0 +1,6 @@
+1. Puc demanar les projeccions a ProjectionDAO des de FilmDAO, o trenco el patro expert?
+2. Estic fent el getProjectionTimesByFilm i me n'estic adonant de que potser estic reinventant una mica
+la roda, perque potser ho podria fer tot amb una comanda de SQL.
+3. La primera pregunta ja no té sentit pq he aplicat la segona pregunta. Lo que fa que aquesta tercera pregunta
+tampoc tingui sentit. És a dir: podria esborrar aquest arxiu de text... Però llavors, com quedaria constancia de que
+s'ha produït tota aquesta reflexió i que se n'ha après algo al respecte? Doncs així estem.
