@@ -57,6 +57,31 @@ public class TheaterDAO {
 
     }
 
+    public static int getTheatersRows(){
+
+        try {
+
+            Connection dbConnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+            Statement statement = dbConnection.createStatement();
+
+            ResultSet rS = statement.executeQuery("SELECT COUNT(name) FROM theater;");
+
+            rS.next();
+
+            int nRows = rS.getInt("count");
+
+            statement.close();
+            dbConnection.close();
+
+            return nRows;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+
+        }
+
+    }
+
     public static ArrayList<Theater> getTheaters(){
 
         ArrayList<Theater> theaters = new ArrayList<>();
@@ -206,7 +231,7 @@ public class TheaterDAO {
         for (Theater currentTheater :
                 TheaterDAO.getTheaters()) {
             output += "Sala \"" + currentTheater.getName() + "\" (número " + currentTheater.getNumber()
-                    + ") | Capacitat per a " + currentTheater.getCapacity() + " persones.\n";
+                    + ") | Capacitat per a " + currentTheater.getCapacity() + " persones.\n\n";
         }
 
         return output;

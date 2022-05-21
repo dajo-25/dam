@@ -159,16 +159,39 @@ public class ProjectionDAO {
             String sql = "SELECT F.title, P.hour, T.name FROM projection P INNER JOIN theater T "
                     + "ON P.id_theater = T.number INNER JOIN film F ON P.id_film = F.id WHERE T.number = "
                     + givenTheaterNum + ";";
+            ResultSet rS;
 
-            output += statement.executeQuery("SELECT name FROM theater WHERE number =" + givenTheaterNum + ";")
-                    .getString(0) + "\" són:\n";
+            rS = statement.executeQuery("SELECT name FROM theater WHERE number ="
+                    + givenTheaterNum + ";");
 
-            ResultSet resultSet = statement.executeQuery(sql);
+            rS.next();
 
-            while (resultSet.next()){
+            String theaterName = rS.getString("name");
 
-                output += resultSet.getString("title") + " | A les "
-                        + resultSet.getString("hour") + "\n";
+            rS = statement.executeQuery("SELECT COUNT(F.title) FROM projection P INNER JOIN theater T "
+                    + "ON P.id_theater = T.number INNER JOIN film F ON P.id_film = F.id WHERE T.number = "
+                    + givenTheaterNum + ";");
+
+            rS.next();
+
+            if (rS.getInt("count") != 0){
+
+                output += theaterName + "\" són:\n";
+
+
+                ResultSet resultSet = statement.executeQuery(sql);
+
+                while (resultSet.next()){
+
+                    output += " · " + resultSet.getString("title") + " | A les "
+                            + resultSet.getString("hour") + "\n";
+
+                }
+
+            }else {
+
+                output = "No s'han trobat projeccions programades per a la sala \"" + theaterName
+                        + "\"\n";
 
             }
 
@@ -176,7 +199,11 @@ public class ProjectionDAO {
             dbConnection.close();
 
             return output;
+
+
+
         }catch (Exception e){
+            e.printStackTrace();
             return "S'ha produït un error";
         }
 

@@ -292,12 +292,12 @@ public class FilmDAO {
 
     public static String filmsToString() {
 
-        String output = "Aquestes són les películes:\n";
+        String output = "Aquestes són totes les pel·lícules:\n";
 
         for (Film currentFilm :
                 FilmDAO.getFilms()) {
-            output += currentFilm.getTitle().toUpperCase(Locale.ROOT) + " | Duració: " + currentFilm.getDuration()
-                    + " minuts | Argument: " + currentFilm.getDescription() + "\n";
+            output += " · " + currentFilm.getTitle().toUpperCase(Locale.ROOT) + " | Duració: " + currentFilm.getDuration()
+                    + " minuts | Argument: " + currentFilm.getDescription() + "\n\n";
         }
 
         return output;
@@ -306,12 +306,12 @@ public class FilmDAO {
 
     public static String filmsToString(ArrayList<Film> films) {
 
-        String output = "Aquestes són les películes:\n";
+        String output = "Aquestes són les pel·lícules que coincideixen amb el criteri de cerca:\n";
 
         for (Film currentFilm :
                 films) {
-            output += currentFilm.getTitle().toUpperCase(Locale.ROOT) + " | Duració: " + currentFilm.getDuration()
-                    + " minuts | Argument: " + currentFilm.getDescription() + "\n";
+            output += " · " + currentFilm.getTitle().toUpperCase(Locale.ROOT) + " | Duració: " + currentFilm.getDuration()
+                    + " minuts | Argument: " + currentFilm.getDescription() + "\n\n";
         }
 
         return output;

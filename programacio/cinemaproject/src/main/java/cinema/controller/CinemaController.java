@@ -82,8 +82,16 @@ public class CinemaController {
         return FilmDAO.filmsShorterThan(givenLength);
     }
 
-    public static String projectionsFromTheater(int givenTheaterNum) {
+    public static String projectionsClassifiedByTheater() {
 
-        return  ProjectionDAO.projectionsFromTheaterToString(givenTheaterNum);
+        String output = "Projeccions classificades per sales:\n\n";
+
+        for (int i = 1; i <= TheaterDAO.getTheatersRows(); i++){
+
+            output += ProjectionDAO.projectionsFromTheaterToString(i) + "\n";
+
+        }
+
+        return  output;
     }
 }
