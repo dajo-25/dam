@@ -35,7 +35,7 @@ public class TheaterDAO {
             bdconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = bdconnection.createStatement();
             sql = "INSERT INTO theater values(" + theater.getNumber() +", '" +
-                    theater.getName() + "', " + theater.getCapacity() + ");";
+                    theater.getName().replace('\'', '@') + "', " + theater.getCapacity() + ");";
 
             /**
              * executeQuery() per als SELECT
@@ -70,6 +70,7 @@ public class TheaterDAO {
 
             int nRows = rS.getInt("count");
 
+            rS.close();
             statement.close();
             dbConnection.close();
 
@@ -104,13 +105,14 @@ public class TheaterDAO {
 
                 Theater theater = new Theater();
                 theater.setNumber(result.getInt("number"));
-                theater.setName(result.getString("name"));
+                theater.setName(result.getString("name").replace('@', '\''));
                 theater.setCapacity(result.getInt("capacity"));
 
                 theaters.add(theater);
 
             }
 
+            result.close();
             statement.close();
             bdConnection.close();
 
@@ -224,16 +226,4 @@ public class TheaterDAO {
 
     }
 
-    public static String theatersToString() {
-
-        String output = "Aquestes són les sales:\n";
-
-        for (Theater currentTheater :
-                TheaterDAO.getTheaters()) {
-            output += "Sala \"" + currentTheater.getName() + "\" (número " + currentTheater.getNumber()
-                    + ") | Capacitat per a " + currentTheater.getCapacity() + " persones.\n\n";
-        }
-
-        return output;
-    }
 }

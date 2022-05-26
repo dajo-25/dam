@@ -1,7 +1,5 @@
 package cinema.model;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
@@ -39,7 +37,7 @@ public class ProjectionDAO {
             statement = bdconnection.createStatement();
 
             sql = "INSERT INTO projection VALUES(" + theaterNum
-                    + ", (SELECT id FROM film WHERE title LIKE('"  + title + "'))"
+                    + ", (SELECT id FROM film WHERE title LIKE('"  + title.replace('\'', '@') + "'))"
                     + ", '" + time +"');";
 
             /**
@@ -87,8 +85,8 @@ public class ProjectionDAO {
                 //System.out.println(Integer.parseInt(currentData[1]) + " | " + currentData[0] + " | " + currentData[2]);
 
                 sentence = "INSERT INTO projection VALUES(" + Integer.parseInt(currentData[1])
-                        + ", (SELECT id FROM film WHERE title LIKE('"  + currentData[0] + "'))"
-                        + ", '" + currentData[2] +"');";
+                        + ", (SELECT id FROM film WHERE title LIKE('"  + currentData[0].replace('\'', '@') + "'))"
+                        + ", '" + currentData[2].replace('\'', '@') +"');";
 
                 statement.executeUpdate(sentence);
 
@@ -166,7 +164,7 @@ public class ProjectionDAO {
 
             rS.next();
 
-            String theaterName = rS.getString("name");
+            String theaterName = rS.getString("name").replace('@', '\'');
 
             rS = statement.executeQuery("SELECT COUNT(F.title) FROM projection P INNER JOIN theater T "
                     + "ON P.id_theater = T.number INNER JOIN film F ON P.id_film = F.id WHERE T.number = "
@@ -183,10 +181,13 @@ public class ProjectionDAO {
 
                 while (resultSet.next()){
 
-                    output += " · " + resultSet.getString("title") + " | A les "
+                    output += " · " + resultSet.getString("title").replace('@', '\'')
+                            + " | A les "
                             + resultSet.getString("hour") + "\n";
 
                 }
+
+                resultSet.close();
 
             }else {
 
@@ -194,6 +195,8 @@ public class ProjectionDAO {
                         + "\"\n";
 
             }
+
+            rS.close();
 
             statement.close();
             dbConnection.close();

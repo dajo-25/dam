@@ -1,13 +1,11 @@
 package cinema.main;
 
 import cinema.controller.CinemaController;
-import cinema.model.Film;
-import cinema.model.ProjectionDAO;
-import cinema.model.Theater;
-import cinema.model.TheaterDAO;
+import cinema.model.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CinemaMain {
@@ -30,7 +28,7 @@ public class CinemaMain {
             System.out.println("\t6. Afegir una projecció");
             System.out.println("\t7. Afegir una pel·lícula");
             System.out.println("\t8. Modificar la capacitat d'una sala");
-            //System.out.println("\t9. Debugging");
+            System.out.println("\t9. ResetDB");
             System.out.print("Opció: ");
             option = Integer.parseInt(scan.nextLine());
 
@@ -39,10 +37,10 @@ public class CinemaMain {
                     System.out.println("Tancant el gestor del cinema...");
                     break;
                 case 1:
-                    System.out.println(CinemaController.theatersToString());
+                    System.out.println(CinemaMain.theatersToString(CinemaController.getTheaters()));
                     break;
                 case 2:
-                    System.out.println(CinemaController.filmsToString());
+                    System.out.println(CinemaMain.filmsToString());
                     break;
                 case 3:
 
@@ -50,7 +48,7 @@ public class CinemaMain {
 
                     ArrayList<Film> films1 = CinemaController.filmsStartingAt(scan.nextLine());
 
-                    System.out.println(CinemaController.filmsToString(films1));
+                    System.out.println(CinemaMain.filmsToString(films1));
 
                     break;
                 case 4:
@@ -59,7 +57,7 @@ public class CinemaMain {
 
                     ArrayList<Film> films2 = CinemaController.filmsShorterThan(Integer.parseInt(scan.nextLine()));
 
-                    System.out.println(CinemaController.filmsToString(films2));
+                    System.out.println(CinemaMain.filmsToString(films2));
 
                     break;
                 case 5:
@@ -144,4 +142,47 @@ public class CinemaMain {
         } while(option != 0);
 
     }
+
+    private static String theatersToString(ArrayList<Theater> theaters){
+
+        String output = "Aquestes són les sales:\n";
+
+        for (Theater currentTheater :
+                theaters) {
+            output += "Sala \"" + currentTheater.getName() + "\" (número " + currentTheater.getNumber()
+                    + ") | Capacitat per a " + currentTheater.getCapacity() + " persones.\n\n";
+        }
+
+        return output;
+
+    }
+
+    private static String filmsToString(){
+
+        String output = "Aquestes són totes les pel·lícules:\n";
+
+        for (Film currentFilm :
+                CinemaController.getAllFilms()) {
+            output += " · " + currentFilm.getTitle().toUpperCase(Locale.ROOT) + " | Duració: " + currentFilm.getDuration()
+                    + " minuts | Argument: " + currentFilm.getDescription() + "\n\n";
+        }
+
+        return output;
+
+    }
+
+    private static  String filmsToString(ArrayList<Film> films){
+
+        String output = "Aquestes són les pel·lícules que coincideixen amb el criteri de cerca:\n";
+
+        for (Film currentFilm :
+                films) {
+            output += " · " + currentFilm.getTitle().toUpperCase(Locale.ROOT) + " | Duració: " + currentFilm.getDuration()
+                    + " minuts | Argument: " + currentFilm.getDescription() + "\n\n";
+        }
+
+        return output;
+
+    }
+
 }
