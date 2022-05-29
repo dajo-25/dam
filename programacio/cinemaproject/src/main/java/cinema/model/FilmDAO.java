@@ -36,8 +36,8 @@ public class FilmDAO {
             bdconnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
             statement = bdconnection.createStatement();
 
-            sql = "INSERT INTO film (title, description, duration) values('" + film.getTitle() +"', '" +
-                    film.getDescription() + "', " + film.getDuration() + ");";
+            sql = "INSERT INTO film (title, description, duration) values('" + film.getTitle().replace('\'','@') +"', '" +
+                    film.getDescription().replace('\'','@') + "', " + film.getDuration() + ");";
 
             /**
              * executeQuery() per als SELECT
@@ -111,14 +111,15 @@ public class FilmDAO {
             while (result.next()){
 
                 Film film = new Film();
-                film.setTitle(result.getString("title"));
-                film.setDescription(result.getString("description"));
+                film.setTitle(result.getString("title").replace('@', '\''));
+                film.setDescription(result.getString("description").replace('@', '\''));
                 film.setDuration(result.getInt("duration"));
 
                 films.add(film);
 
             }
 
+            result.close();
             statement.close();
             bdConnection.close();
 
@@ -154,14 +155,15 @@ public class FilmDAO {
             while (result.next()){
 
                 Film film = new Film();
-                film.setTitle(result.getString("title"));
-                film.setDescription(result.getString("description"));
+                film.setTitle(result.getString("title").replace('@', '\''));
+                film.setDescription(result.getString("description").replace('@', '\''));
                 film.setDuration(result.getInt("duration"));
 
                 films.add(film);
 
             }
 
+            result.close();
             statement.close();
             bdConnection.close();
 
@@ -196,14 +198,15 @@ public class FilmDAO {
             while (result.next()){
 
                 Film film = new Film();
-                film.setTitle(result.getString("title"));
-                film.setDescription(result.getString("description"));
+                film.setTitle(result.getString("title").replace('@', '\''));
+                film.setDescription(result.getString("description").replace('@', '\''));
                 film.setDuration(result.getInt("duration"));
 
                 films.add(film);
 
             }
 
+            result.close();
             statement.close();
             bdConnection.close();
 
@@ -233,9 +236,11 @@ public class FilmDAO {
 
             result = statement.executeQuery(sqlSentence);
 
-            foundFilm = new Film(result.getString("title"), result.getString("description"),
+            foundFilm = new Film(result.getString("title").replace('@', '\''),
+                    result.getString("description").replace('@', '\''),
                     result.getInt("duration"));
 
+            result.close();
             statement.close();
             bdConnection.close();
 
@@ -290,33 +295,6 @@ public class FilmDAO {
 
     }
 
-    public static String filmsToString() {
-
-        String output = "Aquestes són totes les pel·lícules:\n";
-
-        for (Film currentFilm :
-                FilmDAO.getFilms()) {
-            output += " · " + currentFilm.getTitle().toUpperCase(Locale.ROOT) + " | Duració: " + currentFilm.getDuration()
-                    + " minuts | Argument: " + currentFilm.getDescription() + "\n\n";
-        }
-
-        return output;
-
-    }
-
-    public static String filmsToString(ArrayList<Film> films) {
-
-        String output = "Aquestes són les pel·lícules que coincideixen amb el criteri de cerca:\n";
-
-        for (Film currentFilm :
-                films) {
-            output += " · " + currentFilm.getTitle().toUpperCase(Locale.ROOT) + " | Duració: " + currentFilm.getDuration()
-                    + " minuts | Argument: " + currentFilm.getDescription() + "\n\n";
-        }
-
-        return output;
-
-    }
 
     public static ArrayList<Film> filmsStartingAt(String givenTime) {
 
@@ -340,14 +318,15 @@ public class FilmDAO {
             while (result.next()){
 
                 Film film = new Film();
-                film.setTitle(result.getString("title"));
-                film.setDescription(result.getString("description"));
+                film.setTitle(result.getString("title").replace('@', '\''));
+                film.setDescription(result.getString("description").replace('@', '\''));
                 film.setDuration(result.getInt("duration"));
 
                 films.add(film);
 
             }
 
+            result.close();
             statement.close();
             bdConnection.close();
 
@@ -379,14 +358,15 @@ public class FilmDAO {
             while (result.next()){
 
                 Film film = new Film();
-                film.setTitle(result.getString("title"));
-                film.setDescription(result.getString("description"));
+                film.setTitle(result.getString("title").replace('@', '\''));
+                film.setDescription(result.getString("description").replace('@', '\''));
                 film.setDuration(result.getInt("duration"));
 
                 films.add(film);
 
             }
 
+            result.close();
             statement.close();
             bdConnection.close();
 

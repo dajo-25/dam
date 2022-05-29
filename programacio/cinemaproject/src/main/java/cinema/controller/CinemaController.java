@@ -58,28 +58,20 @@ public class CinemaController {
 
     }
 
-    public static String theatersToString(){
+    public static ArrayList<Theater> getTheaters(){
 
-        return TheaterDAO.theatersToString();
+        return TheaterDAO.getTheaters();
     }
 
-    public static String filmsToString(){
+    public static ArrayList<Film> getAllFilms(){
 
-        return FilmDAO.filmsToString();
+        return FilmDAO.getFilms();
     }
 
-    public static String filmsToString(ArrayList<Film> films){
+    public static ArrayList<Film> getFilmsShorterThan(int givenLength){
 
-        return FilmDAO.filmsToString(films);
-    }
+        return filmsShorterThan(givenLength);
 
-    public static ArrayList<Film> filmsStartingAt(String givenTime) {
-
-        return FilmDAO.filmsStartingAt(givenTime);
-    }
-
-    public static ArrayList<Film> filmsShorterThan(int givenLength) {
-        return FilmDAO.filmsShorterThan(givenLength);
     }
 
     public static String projectionsClassifiedByTheater() {
@@ -94,4 +86,16 @@ public class CinemaController {
 
         return  output;
     }
+
+    public static ArrayList<Film> filmsStartingAt(String givenTime) {
+
+        return FilmDAO.filmsStartingAt(givenTime);
+    }
+
+    public static ArrayList<Film> filmsShorterThan(int givenLength) {
+
+        return FilmDAO.filmsShorterThan(givenLength);
+    }
+
+
 }
